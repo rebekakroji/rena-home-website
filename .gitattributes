@@ -1,0 +1,13 @@
+# Store text files with LF line endings in the repository (consistent on Windows, macOS and Linux build servers).
+* text=auto eol=lf
+
+# Images and fonts are binary — never modify line endings.
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.webp binary
+*.avif binary
+*.gif  binary
+*.ico  binary
+*.woff binary
+*.woff2 binary
