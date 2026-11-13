@@ -3,8 +3,10 @@
 // Names, taglines, descriptions and image descriptions live in src/i18n/translations.js
 // (keyed by slug and file name) and are merged in by the LanguageProvider.
 
+import { BASE } from './site';
+
 const img = (folder, file, w, h) => ({
-  src: encodeURI(`/images/${folder}/${file}`),
+  src: encodeURI(`${BASE}images/${folder}/${file}`),
   file,
   width: w,
   height: h,

@@ -1,3 +1,7 @@
+// Base path of the deployed site ("./" by default, see vite.config.js). Prefix every
+// file from public/ with it so images work on the GitHub Pages URL and on a custom domain.
+export const BASE = import.meta.env.BASE_URL;
+
 // Only verified business information, as provided by the business.
 // Translatable text (opening hours, navigation labels) lives in src/i18n/translations.js.
 
@@ -20,7 +24,7 @@ export const site = {
   instagramDmUrl: 'https://ig.me/m/mobileri_rena',
   mapsUrl:
     'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('RENA HOME, Tirane - Fushe Kruje km 14, Nikel'),
-  logo: '/images/logo/rena-logo.jpeg',
+  logo: `${BASE}images/logo/rena-logo.jpeg`,
 };
 
 // Section ids double as URL anchors, so they stay the same in every language.
