@@ -56,9 +56,7 @@ export default function Footer() {
               ))}
               <p>
                 <a href={`mailto:${site.email}`} className="footer__email">
-                  {/* Allow a line break right after "@" on narrow screens. */}
-                  {site.email.split('@')[0]}@<wbr />
-                  {site.email.split('@')[1]}
+                  {site.email}
                 </a>
               </p>
             </address>
