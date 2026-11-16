@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { navLinks, site } from '../data/site';
+import { navHref, navLinks, site } from '../data/site';
 import { useScrollLock } from '../hooks/useScrollLock';
 import { useLanguage } from '../i18n/LanguageContext';
 import Logo from './Logo';
@@ -29,7 +29,8 @@ export default function Header({ activeSection, solid }) {
 
   // Close the mobile menu when switching to a desktop layout.
   useEffect(() => {
-    const mq = window.matchMedia('(min-width: 961px)');
+    // Must match the CSS breakpoint where the inline navigation appears (min-width: 1181px).
+    const mq = window.matchMedia('(min-width: 1181px)');
     const onChange = () => mq.matches && setMenuOpen(false);
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
@@ -47,7 +48,7 @@ export default function Header({ activeSection, solid }) {
             {navLinks.map((link) => (
               <li key={link.id}>
                 <a
-                  href={`#${link.id}`}
+                  href={navHref(link)}
                   className={`header__link ${activeSection === link.id ? 'is-active' : ''}`}
                   aria-current={activeSection === link.id ? 'true' : undefined}
                 >
@@ -86,7 +87,7 @@ export default function Header({ activeSection, solid }) {
           <ol className="mobile-menu__list">
             {navLinks.map((link, i) => (
               <li key={link.id} style={{ '--i': i }}>
-                <a href={`#${link.id}`} onClick={closeMenu}>
+                <a href={navHref(link)} onClick={closeMenu}>
                   <span className="mobile-menu__num">{String(i + 1).padStart(2, '0')}</span>
                   {t.nav[link.id]}
                 </a>

@@ -19,6 +19,10 @@ dist-ssr/
 secrets/
 credentials*.json
 service-account*.json
+# Cloudflare Wrangler: local Worker secrets and state
+.dev.vars
+.dev.vars.*
+.wrangler/
 
 # Logs and caches
 *.log

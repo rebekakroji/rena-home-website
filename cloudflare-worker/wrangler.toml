@@ -1,0 +1,31 @@
+# RENA HOME — design API Worker (DESIGN WITH RENA HOME).
+# Deploy from this folder:  npx wrangler@4 deploy     (see ../README.md, "AI design API")
+#
+# No secrets live here: Workers AI is called through the AI binding, which needs no API token.
+
+name = "rena-home-design-api"
+main = "src/index.js"
+compatibility_date = "2026-01-20"
+workers_dev = true
+
+# Workers AI binding → env.AI.run(...). Usage is billed in neurons (10,000 free per day).
+[ai]
+binding = "AI"
+
+[vars]
+# Exact origins allowed to call the API (scheme + host [+ port], no path).
+# Add the RENA HOME domain here when it is purchased, e.g. "https://renahome.al,https://www.renahome.al".
+ALLOWED_ORIGINS = "https://rebekakroji.github.io,http://localhost:5173,http://localhost:4173"
+
+# Per-IP rate limit: 5 designs per 60 seconds per visitor (approximate, counted per Cloudflare location).
+# namespace_id must be a positive integer that is unique within the Cloudflare account.
+[[ratelimits]]
+name = "RATE_LIMITER"
+namespace_id = "2401"
+
+  [ratelimits.simple]
+  limit = 5
+  period = 60
+
+[observability]
+enabled = true

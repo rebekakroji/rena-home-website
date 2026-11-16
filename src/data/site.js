@@ -6,7 +6,9 @@ export const BASE = import.meta.env.BASE_URL;
 // Translatable text (opening hours, navigation labels) lives in src/i18n/translations.js.
 
 // WhatsApp chat link in the official wa.me format: international number, digits only.
-export const whatsappUrl = (tel) => `https://wa.me/${tel.replace(/\D/g, '')}`;
+// An optional message pre-fills the chat.
+export const whatsappUrl = (tel, text) =>
+  `https://wa.me/${tel.replace(/\D/g, '')}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
 
 export const site = {
   name: 'RENA HOME',
@@ -28,11 +30,14 @@ export const site = {
 };
 
 // Section ids double as URL anchors, so they stay the same in every language.
-// Labels come from `t.nav[id]`.
+// Labels come from `t.nav[id]`. Links with `href` open a separate page instead of a homepage section.
 export const navLinks = [
   { id: 'kryefaqja' },
   { id: 'koleksionet' },
   { id: 'projektet' },
+  { id: 'dizajno', href: '#/dizajno' },
   { id: 'rreth-nesh' },
   { id: 'kontakt' },
 ];
+
+export const navHref = (link) => link.href || `#${link.id}`;

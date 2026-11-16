@@ -12,6 +12,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CollectionPage from './components/CollectionPage';
 import WhatsAppButton from './components/WhatsAppButton';
+import DesignStudio from './components/design/DesignStudio';
 
 export default function App() {
   const route = useHashRoute();
@@ -24,7 +25,7 @@ export default function App() {
     const cameFromOtherPage = prevPage.current !== route.page;
     prevPage.current = route.page;
 
-    if (route.page === 'collection') {
+    if (route.page !== 'home') {
       window.scrollTo({ top: 0, behavior: 'instant' });
       return;
     }
@@ -39,15 +40,15 @@ export default function App() {
     }
   }, [route]);
 
-  // Homepage title follows the active language (collection pages set their own).
+  // Homepage title follows the active language (other pages set their own).
   useEffect(() => {
-    if (route.page !== 'collection') document.title = t.meta.title;
+    if (route.page === 'home') document.title = t.meta.title;
   }, [route.page, t]);
 
   // Highlight the nav item for the section currently in view.
   useEffect(() => {
     if (route.page !== 'home') {
-      setActiveSection('koleksionet');
+      setActiveSection(route.page === 'design' ? 'dizajno' : 'koleksionet');
       return;
     }
     const sections = navLinks.map((l) => document.getElementById(l.id)).filter(Boolean);
@@ -69,9 +70,11 @@ export default function App() {
       }}>
         {t.skipLink}
       </a>
-      <Header activeSection={activeSection} solid={route.page === 'collection'} />
+      <Header activeSection={activeSection} solid={route.page !== 'home'} />
       <main id="main" tabIndex={-1}>
-        {route.page === 'collection' ? (
+        {route.page === 'design' ? (
+          <DesignStudio />
+        ) : route.page === 'collection' ? (
           <CollectionPage key={route.slug} slug={route.slug} />
         ) : (
           <>

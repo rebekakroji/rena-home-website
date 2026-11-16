@@ -25,6 +25,7 @@ const sq = {
     kryefaqja: 'Kryefaqja',
     koleksionet: 'Koleksionet',
     projektet: 'Projektet',
+    dizajno: 'Dizajno',
     'rreth-nesh': 'Rreth nesh',
     kontakt: 'Kontakt',
   },
@@ -36,7 +37,7 @@ const sq = {
     openMenu: 'Hap menunë',
     closeMenu: 'Mbyll menunë',
     language: 'Gjuha',
-    languageNames: { sq: 'Shqip', en: 'Anglisht' },
+    languageNames: { sq: 'Shqip', en: 'Anglisht', it: 'Italisht' },
   },
 
   logo: {
@@ -210,6 +211,93 @@ const sq = {
     call: 'Telefononi',
   },
 
+  // DESIGN WITH RENA HOME (#/dizajno). The title stays in English in every language.
+  designStudio: {
+    docTitle: 'DESIGN WITH RENA HOME — RENA HOME',
+    eyebrow: 'Studio dizajni',
+    title: 'DESIGN WITH RENA HOME',
+    subtitle: 'Transformoni hapësirën tuaj. Vizualizoni idetë tuaja.',
+    intro:
+      'Ngarkoni një foto të ambientit tuaj, zgjidhni stilin, ngjyrat dhe materialet që ju pëlqejnë dhe shikoni si mund ta transformojnë mobiljet RENA HOME. Më pas, ekipi ynë i kthen idetë tuaja në një projekt me porosi.',
+    introPoints: ['Zgjidhni hapësirën', 'Ngarkoni një foto', 'Personalizoni stilin dhe materialet', 'Kërkoni një ofertë'],
+    badge: 'Vizualizim me AI · së shpejti',
+    badgeLive: 'Vizualizim me AI',
+    start: 'Filloni dizajnin',
+    stepsAria: 'Hapat e dizajnit',
+    stepLabel: (n, total) => `Hapi ${n} nga ${total}`,
+    steps: { room: 'Hapësira', upload: 'Fotoja', customize: 'Personalizimi', result: 'Dizajni juaj' },
+    back: 'Kthehu',
+    next: 'Vazhdo',
+    restart: 'Fillo nga e para',
+    notSelected: 'Pa zgjedhur',
+    none: 'Asnjë',
+    room: {
+      title: 'Cilën hapësirë po dizajnoni?',
+      text: 'Zgjidhni ambientin që dëshironi të transformoni.',
+      options: { kitchen: 'Kuzhinë', living: 'Sallon', bedroom: 'Dhomë gjumi', wardrobe: 'Garderobë', other: 'Hapësirë tjetër' },
+    },
+    upload: {
+      title: 'Ngarkoni një foto të hapësirës suaj',
+      text: 'Një foto e ndriçuar mirë, e bërë nga përballë, jep rezultatin më të mirë.',
+      privacy: 'Fotoja juaj mbetet në shfletuesin tuaj. Nuk ngarkohet dhe nuk ruhet askund.',
+      privacyAi:
+        'Fotoja mbetet në shfletuesin tuaj derisa të klikoni “Gjeneroni dizajnin tim”. Atëherë një kopje e zvogëluar (maks. 512 px, pa të dhëna vendndodhjeje) dërgohet te Cloudflare Workers AI për të krijuar dizajnin. RENA HOME nuk e ruan foton tuaj.',
+      drop: 'Tërhiqni dhe lëshoni foton këtu',
+      dropActive: 'Lëshojeni për ta ngarkuar',
+      or: 'ose',
+      browse: 'Zgjidhni një foto',
+      formats: 'JPG, JPEG, PNG ose WEBP · deri në 15 MB',
+      replace: 'Zëvendësoni',
+      remove: 'Hiqni',
+      previewAlt: 'Fotoja e ngarkuar e hapësirës suaj',
+      errorType: 'Ju lutemi zgjidhni një foto JPG, JPEG, PNG ose WEBP.',
+      errorSize: 'Kjo foto është më e madhe se 15 MB. Ju lutemi zgjidhni një më të vogël.',
+      errorRead: 'Kjo foto nuk mund të hapet. Provoni një foto tjetër.',
+    },
+    customize: {
+      title: 'Personalizoni dizajnin tuaj',
+      style: 'Stili i interierit',
+      color: 'Ngjyra e mobiljeve',
+      material: 'Materiali',
+      preferences: 'Preferenca shtesë',
+      preferencesHint: 'Zgjidhni sa të doni.',
+      styles: { modern: 'Modern', minimalist: 'Minimalist', luxury: 'Luksoz', scandinavian: 'Skandinav' },
+      colors: { white: 'E bardhë', beige: 'Bezhë', grey: 'Gri', black: 'E zezë', brown: 'Kafe', wood: 'Dru natyral' },
+      materials: { wood: 'Dru', mdf: 'MDF', marble: 'Mermer', matte: 'Mat', glossy: 'Me shkëlqim' },
+      prefs: {
+        lighting: 'Ndriçim LED i integruar',
+        handleless: 'Fasada pa doreza',
+        island: 'Ishull ose banak',
+        storage: 'Më shumë hapësirë ruajtjeje',
+        appliances: 'Pajisje të integruara',
+        glass: 'Vitrina xhami',
+        softclose: 'Sirtarë me mbyllje të butë',
+        open: 'Rafte të hapura',
+      },
+      generate: 'Gjeneroni dizajnin tim',
+      generating: 'Duke gjeneruar…',
+      aiNotice: 'Fotoja do të dërgohet te Cloudflare Workers AI për përpunim.',
+    },
+    result: {
+      title: 'Dizajni juaj',
+      pendingTitle: 'Gjenerimi i dizajnit me AI vjen së shpejti',
+      pendingText:
+        'Vizualizimi me AI do të aktivizohet sapo të lidhet shërbimi ynë i gjenerimit të imazheve. Fotoja dhe zgjedhjet tuaja janë gati — kërkoni një ofertë dhe dizajnerët tanë do ta përgatisin propozimin tuaj personalisht.',
+      errorTitle: 'Dizajni nuk mund të gjenerohej',
+      errorText: 'Provoni përsëri pas pak, ose kërkoni një ofertë dhe ekipi ynë do t’ju ndihmojë drejtpërdrejt.',
+      generatedAlt: 'Dizajn i gjeneruar me AI për hapësirën tuaj',
+      download: 'Shkarkoni dizajnin',
+      downloadHint: 'Shkarkimi bëhet i mundur pasi të gjenerohet dizajni.',
+      quote: 'Kërkoni një ofertë',
+      quoteChoose: 'Zgjidhni një numër WhatsApp',
+      quoteHint: 'Zgjedhjet tuaja shtohen automatikisht në mesazh. Foton e ambientit mund ta dërgoni në bisedë.',
+      edit: 'Ndryshoni zgjedhjet',
+      tryAgain: 'Provoni përsëri',
+    },
+    quoteMessage: ({ room, style, color, material, preferences }) =>
+      `Përshëndetje RENA HOME,\n\nDëshiroj një ofertë për një dizajn me këto preferenca (DESIGN WITH RENA HOME):\n• Hapësira: ${room}\n• Stili: ${style}\n• Ngjyra: ${color}\n• Materiali: ${material}\n• Preferencat: ${preferences}\n\nDo t’ju dërgoj një foto të ambientit në këtë bisedë.`,
+  },
+
   // Collection texts, keyed by slug. Image descriptions are keyed by file name.
   collections: {
     'dhoma-gjumi': {
@@ -362,6 +450,7 @@ const en = {
     kryefaqja: 'Home',
     koleksionet: 'Collections',
     projektet: 'Projects',
+    dizajno: 'Design',
     'rreth-nesh': 'About',
     kontakt: 'Contact',
   },
@@ -373,7 +462,7 @@ const en = {
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
     language: 'Language',
-    languageNames: { sq: 'Albanian', en: 'English' },
+    languageNames: { sq: 'Albanian', en: 'English', it: 'Italian' },
   },
 
   logo: {
@@ -545,6 +634,92 @@ const en = {
     call: 'Call',
   },
 
+  designStudio: {
+    docTitle: 'DESIGN WITH RENA HOME — RENA HOME',
+    eyebrow: 'Design studio',
+    title: 'DESIGN WITH RENA HOME',
+    subtitle: 'Transform your space. Visualize your ideas.',
+    intro:
+      'Upload a photo of your room, choose the style, colours and materials you love, and see how RENA HOME furniture could transform it. Our team then turns your ideas into a made-to-measure design.',
+    introPoints: ['Choose your space', 'Upload a photo', 'Personalise style and materials', 'Request a quote'],
+    badge: 'AI visualisation · coming soon',
+    badgeLive: 'AI visualisation',
+    start: 'Start designing',
+    stepsAria: 'Design steps',
+    stepLabel: (n, total) => `Step ${n} of ${total}`,
+    steps: { room: 'Space', upload: 'Photo', customize: 'Customize', result: 'Your design' },
+    back: 'Back',
+    next: 'Continue',
+    restart: 'Start over',
+    notSelected: 'Not selected',
+    none: 'None',
+    room: {
+      title: 'Which space are you designing?',
+      text: 'Choose the room you would like to transform.',
+      options: { kitchen: 'Kitchen', living: 'Living room', bedroom: 'Bedroom', wardrobe: 'Wardrobe', other: 'Other space' },
+    },
+    upload: {
+      title: 'Upload a photo of your space',
+      text: 'A well-lit photo taken straight on gives the best result.',
+      privacy: 'Your photo stays in your browser. It is not uploaded or stored anywhere.',
+      privacyAi:
+        'Your photo stays in your browser until you click “Generate my design”. A reduced copy (max. 512 px, without location data) is then sent to Cloudflare Workers AI to create your design. RENA HOME does not store your photo.',
+      drop: 'Drag and drop your photo here',
+      dropActive: 'Release to upload',
+      or: 'or',
+      browse: 'Choose a photo',
+      formats: 'JPG, JPEG, PNG or WEBP · up to 15 MB',
+      replace: 'Replace',
+      remove: 'Remove',
+      previewAlt: 'Uploaded photo of your space',
+      errorType: 'Please choose a JPG, JPEG, PNG or WEBP image.',
+      errorSize: 'This photo is larger than 15 MB. Please choose a smaller one.',
+      errorRead: 'This image could not be opened. Please try another photo.',
+    },
+    customize: {
+      title: 'Customize your design',
+      style: 'Interior style',
+      color: 'Furniture colour',
+      material: 'Material',
+      preferences: 'Additional preferences',
+      preferencesHint: 'Select as many as you like.',
+      styles: { modern: 'Modern', minimalist: 'Minimalist', luxury: 'Luxury', scandinavian: 'Scandinavian' },
+      colors: { white: 'White', beige: 'Beige', grey: 'Grey', black: 'Black', brown: 'Brown', wood: 'Natural wood' },
+      materials: { wood: 'Wood', mdf: 'MDF', marble: 'Marble', matte: 'Matte', glossy: 'Glossy' },
+      prefs: {
+        lighting: 'Integrated LED lighting',
+        handleless: 'Handleless fronts',
+        island: 'Island or peninsula',
+        storage: 'Extra storage',
+        appliances: 'Built-in appliances',
+        glass: 'Glass display units',
+        softclose: 'Soft-close drawers',
+        open: 'Open shelving',
+      },
+      generate: 'Generate my design',
+      generating: 'Generating…',
+      aiNotice: 'Your photo will be sent to Cloudflare Workers AI for processing.',
+    },
+    result: {
+      title: 'Your design',
+      pendingTitle: 'AI design generation is coming soon',
+      pendingText:
+        'The AI visualisation will be activated once our image-generation service is connected. Your photo and selections are ready — request a quote and our designers will prepare your proposal personally.',
+      errorTitle: 'The design could not be generated',
+      errorText: 'Please try again in a moment, or request a quote and our team will help you directly.',
+      generatedAlt: 'AI-generated design of your space',
+      download: 'Download design',
+      downloadHint: 'Downloading becomes available once a design has been generated.',
+      quote: 'Request a quote',
+      quoteChoose: 'Choose a WhatsApp number',
+      quoteHint: 'Your selections are added to the message automatically. You can send your room photo in the chat.',
+      edit: 'Edit selections',
+      tryAgain: 'Try again',
+    },
+    quoteMessage: ({ room, style, color, material, preferences }) =>
+      `Hello RENA HOME,\n\nI would like a quote for a design with these preferences (DESIGN WITH RENA HOME):\n• Space: ${room}\n• Style: ${style}\n• Colour: ${color}\n• Material: ${material}\n• Preferences: ${preferences}\n\nI will send a photo of my space in this chat.`,
+  },
+
   collections: {
     'dhoma-gjumi': {
       name: 'Bedrooms',
@@ -671,11 +846,434 @@ const en = {
   },
 };
 
-export const translations = { sq, en };
+// Italian. Addresses visitors with the polite plural ("voi"), matching the Albanian "ju/juaj".
+const it = {
+  meta: {
+    title: 'RENA HOME — Arredamento e interior design a Fushë-Krujë',
+    description:
+      'RENA HOME — arredamento e interior design dal 1993. Camere da letto, cucine, soggiorni e cabine armadio progettati con cura. Tirane - Fushe Kruje km 14 Nikel.',
+  },
+
+  skipLink: 'Vai al contenuto',
+
+  whatsapp: {
+    label: 'Contattateci su WhatsApp',
+    chat: (number) => `Apri una chat WhatsApp con ${number}`,
+  },
+
+  site: {
+    hours: 'Tutti i giorni, 08:00–18:00',
+  },
+
+  nav: {
+    kryefaqja: 'Home',
+    koleksionet: 'Collezioni',
+    projektet: 'Progetti',
+    dizajno: 'Progetta',
+    'rreth-nesh': 'Chi siamo',
+    kontakt: 'Contatti',
+  },
+
+  header: {
+    mainNav: 'Navigazione principale',
+    mobileNav: 'Navigazione mobile',
+    cta: 'Contattateci',
+    openMenu: 'Apri il menu',
+    closeMenu: 'Chiudi il menu',
+    language: 'Lingua',
+    languageNames: { sq: 'Albanese', en: 'Inglese', it: 'Italiano' },
+  },
+
+  logo: {
+    aria: 'RENA HOME — Home',
+  },
+
+  hero: {
+    eyebrow: 'Arredamento & interior design',
+    since: (year) => `dal ${year}`,
+    line1: 'L’eleganza',
+    line2: { before: 'inizia ', em: 'a casa.' },
+    lead: 'Arredi pensati per creare ambienti che rispecchiano il vostro stile e la vostra personalità.',
+    ctaCollections: 'Scopri le collezioni',
+    ctaProjects: 'Guarda i progetti',
+    metaSince: 'Dal',
+    metaLocation: 'Sede',
+    metaHours: 'Orari',
+    insetCaption: 'Soggiorni',
+    scroll: 'Scorri',
+    scrollAria: 'Vai alla sezione Chi siamo',
+  },
+
+  about: {
+    eyebrow: 'Chi siamo',
+    since: 'Dal',
+    title: { before: 'Oltre trent’anni di dedizione alla ', em: 'vostra casa', after: '.' },
+    lead: (year) =>
+      `Dal ${year}, RENA HOME realizza arredi e soluzioni d’interni in cui qualità, design e cura dei dettagli sono al centro di ogni progetto.`,
+    body: 'Dalle cucine alle camere da letto, dai soggiorni alle cabine armadio, ogni elemento è pensato per adattarsi al vostro spazio e al vostro modo di vivere. Per noi un ambiente bello non è un lusso, ma la sensazione di sentirsi davvero a casa.',
+    pillars: [
+      {
+        title: 'Qualità',
+        text: 'Materiali selezionati, lavorazione professionale e garanzia pluriennale — per arredi che resistono nel tempo.',
+      },
+      {
+        title: 'Design',
+        text: 'Arredamento su misura che rispecchia il vostro stile e valorizza con intelligenza ogni spazio.',
+      },
+      {
+        title: 'Dettagli',
+        text: 'Dagli accessori al montaggio finale, curiamo ogni dettaglio che porta comfort e perfeziona l’aspetto dei vostri ambienti.',
+      },
+    ],
+  },
+
+  collectionsSection: {
+    eyebrow: 'Collezioni',
+    title: { before: 'Cinque spazi, ', em: 'un’unica filosofia', after: '.' },
+    text: 'Scegliete una collezione e scoprite i nostri ambienti, dalla quiete della camera da letto al calore del soggiorno.',
+  },
+
+  card: {
+    explore: 'Scopri la collezione',
+    photos: (n) => `${n} foto`,
+    aria: (name, n) => `${name} — scopri la collezione (${n} foto)`,
+  },
+
+  collectionPage: {
+    docTitleMissing: 'Collezione non trovata — RENA HOME',
+    missing: 'Questa collezione non è stata trovata.',
+    back: 'Torna alle collezioni',
+    crumbsAria: 'Percorso di navigazione',
+    crumbRoot: 'Collezioni',
+    number: 'Collezione',
+    pagerAria: 'Altre collezioni',
+    prev: 'Collezione precedente',
+    next: 'Collezione successiva',
+    projectsCount: (n) => `${n} ${n === 1 ? 'progetto' : 'progetti'}`,
+    projectsAria: 'Progetti',
+  },
+
+  gallery: {
+    listAria: (title) => `Foto della collezione ${title}`,
+    open: (i, n, alt) => `Apri la foto ${i} di ${n}: ${alt}`,
+  },
+
+  lightbox: {
+    aria: (title) => `Galleria: ${title}`,
+    ariaDefault: 'Galleria fotografica',
+    close: 'Chiudi la galleria',
+    prev: 'Foto precedente',
+    next: 'Foto successiva',
+  },
+
+  projects: {
+    eyebrow: 'Progetti',
+    title: { before: 'Ambienti realizzati, ', em: 'vissuti ogni giorno', after: '.' },
+    text: 'Una selezione di immagini dei nostri progetti realizzati, in cui arredi, materiali e illuminazione dialogano in perfetta armonia.',
+    // Short captions, in the same order as the photos of the "projekte" collection.
+    captions: [
+      'Isola e parete attrezzata',
+      'Legno, travertino e luce soffusa',
+      'Vetrina illuminata',
+      'Bancone con mensola illuminata',
+      'La zona pranzo',
+      'Dettaglio in travertino',
+    ],
+    viewFull: (alt) => `Visualizza a schermo intero: ${alt}`,
+    more: 'Apri la galleria dei progetti',
+  },
+
+  whyUs: {
+    eyebrow: 'Perché RENA HOME',
+    title: { before: 'Arredi realizzati ', em: 'con cura', after: ', per spazi da vivere davvero.' },
+    reasons: [
+      {
+        title: 'Esperienza dal 1993',
+        text: 'Oltre trent’anni di lavoro ci hanno insegnato che una bella casa si costruisce con pazienza, competenza e rispetto per la materia.',
+      },
+      {
+        title: 'Cura dei dettagli',
+        text: 'Dalla scelta dei materiali alla rifinitura finale, nessun dettaglio è lasciato al caso.',
+      },
+      {
+        title: 'Design e funzionalità',
+        text: 'Ogni soluzione deve essere bella da vedere e semplice da vivere, giorno dopo giorno.',
+      },
+      {
+        title: 'Dedizione a ogni progetto',
+        text: 'Ogni spazio è unico. Ascoltiamo, comprendiamo e seguiamo ogni progetto con dedizione fino alla fine.',
+      },
+    ],
+  },
+
+  contact: {
+    eyebrow: 'Contatti',
+    title: { before: 'Creiamo insieme ', em: 'il vostro spazio', after: '.' },
+    lead: 'Venite a trovarci nel nostro showroom o scriveteci. Saremo lieti di aiutarvi a trovare la soluzione giusta per la vostra casa.',
+    address: 'Indirizzo',
+    phone: 'Telefono',
+    email: 'Email',
+    hours: 'Orari di apertura',
+    instagram: 'Instagram',
+    dm: 'Scriveteci su Instagram',
+    maps: 'Apri in Google Maps',
+    formTitle: 'Inviateci un messaggio',
+    fields: {
+      name: 'Nome e cognome',
+      contact: 'Telefono o email',
+      message: 'Messaggio',
+    },
+    errors: {
+      nameRequired: 'Inserite il vostro nome.',
+      contactRequired: 'Inserite il vostro numero di telefono o la vostra email.',
+      contactInvalid: 'Inserite un numero di telefono o un’email validi.',
+      messageShort: 'Il messaggio deve contenere almeno 10 caratteri.',
+    },
+    submit: 'Invia messaggio',
+    note: 'Il messaggio viene inviato tramite Instagram. I vostri dati non vengono salvati su questo sito.',
+    composed: ({ message, name, contact }) => `Buongiorno RENA HOME,\n\n${message}\n\n${name}\nContatto: ${contact}`,
+    thanks: (firstName) => `Grazie, ${firstName}.`,
+    readyTitle: 'Il vostro messaggio è pronto.',
+    readyCopied: (handle) =>
+      `Abbiamo copiato il vostro messaggio. Aprite Instagram, incollatelo e inviatelo a ${handle}. Vi risponderemo il prima possibile.`,
+    readyManual: (handle) =>
+      `Copiate il messaggio qui sotto e inviatelo a ${handle} su Instagram. Vi risponderemo il prima possibile.`,
+    openInstagram: 'Apri Instagram',
+    another: 'Scrivi un altro messaggio',
+  },
+
+  footer: {
+    brand: (year) =>
+      `Arredamento e interior design dal ${year}. Spazi progettati con cura, per il vostro stile e la vostra personalità.`,
+    navAria: 'Navigazione a piè di pagina',
+    navHeading: 'Navigazione',
+    collectionsHeading: 'Collezioni',
+    visitHeading: 'Venite a trovarci',
+    rights: 'Tutti i diritti riservati.',
+    backToTop: 'Torna su ↑',
+    call: 'Chiama',
+  },
+
+  designStudio: {
+    docTitle: 'DESIGN WITH RENA HOME — RENA HOME',
+    eyebrow: 'Design studio',
+    title: 'DESIGN WITH RENA HOME',
+    subtitle: 'Trasformate il vostro spazio. Visualizzate le vostre idee.',
+    intro:
+      'Caricate una foto del vostro ambiente, scegliete lo stile, i colori e i materiali che preferite e scoprite come gli arredi RENA HOME potrebbero trasformarlo. Il nostro team trasformerà poi le vostre idee in un progetto su misura.',
+    introPoints: ['Scegliete lo spazio', 'Caricate una foto', 'Personalizzate stile e materiali', 'Richiedete un preventivo'],
+    badge: 'Visualizzazione con IA · in arrivo',
+    badgeLive: 'Visualizzazione con IA',
+    start: 'Iniziate a progettare',
+    stepsAria: 'Fasi del progetto',
+    stepLabel: (n, total) => `Fase ${n} di ${total}`,
+    steps: { room: 'Spazio', upload: 'Foto', customize: 'Personalizza', result: 'Il vostro progetto' },
+    back: 'Indietro',
+    next: 'Continua',
+    restart: 'Ricomincia',
+    notSelected: 'Non selezionato',
+    none: 'Nessuna',
+    room: {
+      title: 'Quale spazio state progettando?',
+      text: 'Scegliete l’ambiente che desiderate trasformare.',
+      options: { kitchen: 'Cucina', living: 'Soggiorno', bedroom: 'Camera da letto', wardrobe: 'Cabina armadio', other: 'Altro spazio' },
+    },
+    upload: {
+      title: 'Caricate una foto del vostro spazio',
+      text: 'Una foto ben illuminata, scattata frontalmente, offre il risultato migliore.',
+      privacy: 'La vostra foto resta nel vostro browser. Non viene caricata né salvata da nessuna parte.',
+      privacyAi:
+        'La foto resta nel vostro browser finché non cliccate su “Genera il mio progetto”. A quel punto una copia ridotta (max. 512 px, senza dati di posizione) viene inviata a Cloudflare Workers AI per creare il progetto. RENA HOME non conserva la vostra foto.',
+      drop: 'Trascinate qui la vostra foto',
+      dropActive: 'Rilasciate per caricare',
+      or: 'oppure',
+      browse: 'Scegliete una foto',
+      formats: 'JPG, JPEG, PNG o WEBP · fino a 15 MB',
+      replace: 'Sostituisci',
+      remove: 'Rimuovi',
+      previewAlt: 'Foto caricata del vostro spazio',
+      errorType: 'Scegliete un’immagine JPG, JPEG, PNG o WEBP.',
+      errorSize: 'Questa foto supera i 15 MB. Sceglietene una più leggera.',
+      errorRead: 'Impossibile aprire questa immagine. Provate con un’altra foto.',
+    },
+    customize: {
+      title: 'Personalizzate il vostro progetto',
+      style: 'Stile d’interni',
+      color: 'Colore degli arredi',
+      material: 'Materiale',
+      preferences: 'Preferenze aggiuntive',
+      preferencesHint: 'Selezionate tutte quelle che desiderate.',
+      styles: { modern: 'Moderno', minimalist: 'Minimalista', luxury: 'Lusso', scandinavian: 'Scandinavo' },
+      colors: { white: 'Bianco', beige: 'Beige', grey: 'Grigio', black: 'Nero', brown: 'Marrone', wood: 'Legno naturale' },
+      materials: { wood: 'Legno', mdf: 'MDF', marble: 'Marmo', matte: 'Opaco', glossy: 'Lucido' },
+      prefs: {
+        lighting: 'Illuminazione LED integrata',
+        handleless: 'Ante senza maniglie',
+        island: 'Isola o penisola',
+        storage: 'Più spazio contenitivo',
+        appliances: 'Elettrodomestici da incasso',
+        glass: 'Vetrine',
+        softclose: 'Cassetti con chiusura ammortizzata',
+        open: 'Mensole a giorno',
+      },
+      generate: 'Genera il mio progetto',
+      generating: 'Generazione in corso…',
+      aiNotice: 'La foto verrà inviata a Cloudflare Workers AI per l’elaborazione.',
+    },
+    result: {
+      title: 'Il vostro progetto',
+      pendingTitle: 'La generazione del progetto con l’IA arriverà a breve',
+      pendingText:
+        'La visualizzazione con l’IA sarà attivata non appena verrà collegato il nostro servizio di generazione delle immagini. La vostra foto e le vostre scelte sono pronte: richiedete un preventivo e i nostri designer prepareranno personalmente la vostra proposta.',
+      errorTitle: 'Non è stato possibile generare il progetto',
+      errorText: 'Riprovate tra poco, oppure richiedete un preventivo e il nostro team vi aiuterà direttamente.',
+      generatedAlt: 'Progetto del vostro spazio generato con l’IA',
+      download: 'Scarica il progetto',
+      downloadHint: 'Il download sarà disponibile dopo la generazione del progetto.',
+      quote: 'Richiedi un preventivo',
+      quoteChoose: 'Scegliete un numero WhatsApp',
+      quoteHint: 'Le vostre scelte vengono aggiunte automaticamente al messaggio. Potete inviare la foto dell’ambiente nella chat.',
+      edit: 'Modifica le scelte',
+      tryAgain: 'Riprova',
+    },
+    quoteMessage: ({ room, style, color, material, preferences }) =>
+      `Buongiorno RENA HOME,\n\nvorrei un preventivo per un progetto con queste preferenze (DESIGN WITH RENA HOME):\n• Spazio: ${room}\n• Stile: ${style}\n• Colore: ${color}\n• Materiale: ${material}\n• Preferenze: ${preferences}\n\nInvierò una foto del mio ambiente in questa chat.`,
+  },
+
+  collections: {
+    'dhoma-gjumi': {
+      name: 'Camere da letto',
+      tagline: 'Quiete avvolta nella morbidezza',
+      description:
+        'Ambienti quieti e accoglienti, dove materiali morbidi e linee pulite creano una sensazione di vero riposo.',
+      alts: {
+        'dhoma-gjumi-01.jpeg':
+          'Armadio a incasso beige con vano centrale in vetro illuminato, accanto a un letto imbottito',
+        'dhoma-gjumi-02.jpeg':
+          'Letto con testiera imbottita grigia davanti a una parete in marmo e legno, con mensole illuminate',
+        'dhoma-gjumi-03.jpeg':
+          'Toeletta in legno con specchio rotondo illuminato e parete TV con illuminazione integrata',
+        'dhoma-gjumi-04.jpeg':
+          'Armadio con ante in vetro e ripiani in legno illuminati, con un letto e un plaid grigio in primo piano',
+        'dhoma-gjumi-05.jpeg':
+          'Camera da letto con boiserie a listelli di legno, lampada a sospensione e panca in velluto verde ai piedi del letto',
+      },
+    },
+    kuzhina: {
+      name: 'Cucine',
+      tagline: 'Il cuore della casa, pensato in ogni dettaglio',
+      description:
+        'Cucine funzionali ed eleganti, in cui ogni mobile, superficie e punto luce è pensato per la vita di tutti i giorni.',
+      alts: {
+        'kitchen-new-01.jpeg':
+          'Cucina in legno chiaro e beige con schienale in marmo, lampade a sospensione e tavolo da pranzo con sedie imbottite',
+        'kitchen-new-02.jpeg':
+          'Colonna con forni da incasso e cantinetta per il vino, accanto a mobili in legno e a uno schienale in marmo retroilluminato',
+        'kitchen-new-03.jpeg':
+          'Cucina con penisola in marmo, sgabelli imbottiti, cappa cilindrica e illuminazione sotto i pensili',
+        'kitchen4.jpeg': 'Cucina — dettaglio dei mobili',
+        'kitchen5.jpeg': 'Cucina — vista dell’ambiente',
+        'kitchen5.1.jpeg': 'Cucina — vista da un’altra angolazione',
+        'kitchen7.jpeg': 'Cucina verde scuro opaco con schienale in marmo e divano in primo piano',
+        'kitchen8.jpeg': 'Cucina con mobili blu, pensili in legno e tavolo da pranzo',
+      },
+    },
+    sallone: {
+      name: 'Soggiorni',
+      tagline: 'Spazi che accolgono',
+      description:
+        'Divani, sedie e tavoli da pranzo per zone giorno che accolgono, ispirano e resistono nel tempo.',
+      alts: {
+        'living1.jpeg': 'Soggiorno con divano componibile color crema, tavolini in legno e tende marroni',
+        'living2.jpeg': 'Open space con tavolo in legno, sedie in velluto e cucina grigia',
+        'kendi1.jpeg': 'Soggiorno con divano componibile color crema, poltrona e tavolino',
+        'opal.jpeg': 'Divano Opal in tessuto color cognac con dettagli in pelle',
+        'orlando.jpeg': 'Divano Orlando in tessuto materico beige',
+        'molivo.jpeg': 'Modello Molivo',
+        'tavoline ngrenie.jpeg': 'Tavolo da pranzo con sedie',
+        'tavoline ngrenie 2.jpeg': 'Tavolo da pranzo — un’altra vista',
+        'chair1.jpeg': 'Sedia con seduta e schienale in bouclé bianco e gambe in legno scuro',
+        'chair2.jpeg': 'Sedia — modello 2',
+        'chair3.jpeg': 'Sedia — modello 3',
+        'chair4.jpeg': 'Sedia — modello 4',
+        'chair5.jpeg': 'Sedia — modello 5',
+        'chair6.jpeg': 'Sedia — modello 6',
+      },
+    },
+    garderoba: {
+      name: 'Cabine armadio',
+      tagline: 'Ordine, luce ed estetica',
+      description:
+        'Cabine armadio organizzate con cura, che uniscono ordine, illuminazione integrata ed estetica essenziale.',
+      alts: {
+        'wardrobe-new-01.jpeg':
+          'Cabina armadio con ante in vetro e telaio metallico, ripiani illuminati e cassetti in legno',
+        'wardrobe-new-02.jpeg':
+          'Corridoio della cabina armadio con vetrine illuminate su entrambi i lati e pavimento in legno',
+        'wardrobe-new-03.jpeg': 'Sistema guardaroba a giorno con barre appendiabiti, vani a giorno e cassetti in legno',
+        'wardrobe-new-04.jpeg':
+          'Vetrina con ripiani illuminati per borse e scarpe, accanto a un ingresso con appendiabiti',
+        'wardrobe-new-05.jpeg': 'Sistema guardaroba a giorno con cassetti estraibili e organizer interni',
+        'wardrobe-new-06.jpeg': 'Mensole con illuminazione integrata e pannelli impiallacciati in radica materica',
+        'wardrobe-new-07.jpeg': 'Campione di impiallacciatura in legno materico nei toni del grigio e del bianco',
+        'wardrobe-new-08.jpeg':
+          'Cabina armadio con montanti metallici, ripiani per borse, cassetti e isola con scomparti per accessori',
+        'wardrobe-new-09.jpeg':
+          'Campioni di impiallacciatura in legno in diverse tonalità, dal grigio chiaro al marrone scuro',
+        'wardrobe2.jpeg': 'Cabina armadio con ripiani illuminati, cassetti e pavimento in legno',
+      },
+    },
+    projekte: {
+      name: 'Progetti realizzati',
+      tagline: 'Architettura d’interni, vissuta',
+      description:
+        'Uno sguardo agli ambienti che abbiamo realizzato, dove arredo e architettura d’interni parlano la stessa lingua.',
+      alts: {
+        'projekt1.jpeg': 'Cucina con isola e parete di mobili in legno scuro, con lampada a sospensione nera',
+        'projekt2.jpeg': 'Isola da cucina con piano in travertino davanti a una parete di mobili in legno',
+        'projekt3.jpeg': 'Parete di mobili in legno con vetrina illuminata e tavolo da pranzo ovale',
+        'projekt4.jpeg': 'Bancone da cucina con mobili in legno, piano in marmo e mensola illuminata',
+        'projekt5.jpeg': 'Zona pranzo con tavolo ovale in travertino e sedie in legno di fronte alle finestre',
+        'projekt6.jpeg': 'Vista dall’alto di un tavolo in travertino nella luce del mattino',
+      },
+    },
+  },
+
+  projectGalleries: {
+    'projekt-01': {
+      name: 'Timeless Elegance',
+      tagline: 'Cucina, vetrina e zona pranzo',
+      cta: 'Apri la galleria',
+      open: (name, n) => `Apri la galleria del progetto: ${name} (${n} foto)`,
+    },
+    'projekt-02': {
+      name: 'Contemporary Harmony',
+      tagline: 'Soggiorno, cucina e zona pranzo',
+      cta: 'Apri la galleria',
+      open: (name, n) => `Apri la galleria del progetto: ${name} (${n} foto)`,
+      alts: {
+        'projekt-02-01.jpeg':
+          'Soggiorno con divano componibile color crema, poltrona in velluto verde e parete TV con camino integrato',
+        'projekt-02-02.jpeg':
+          'Zona pranzo con lampadario ad anelli, mensole illuminate e scala in legno e vetro, con poltrone in primo piano',
+        'projekt-02-03.jpeg':
+          'Soggiorno con lunghe tende retroilluminate, divano color crema e tavolini rotondi in marmo',
+        'projekt-02-04.jpeg':
+          'Open space con divano componibile, cucina con penisola e zona pranzo accanto alla scala',
+        'projekt-02-05.jpeg':
+          'Soggiorno con parete TV, rivestimento in legno e cucina con penisola sullo sfondo',
+        'projekt-02-06.jpeg': 'Open space — vista d’insieme',
+      },
+    },
+  },
+};
+
+export const translations = { sq, en, it };
 
 export const LANGUAGES = [
   { code: 'sq', label: 'AL' },
   { code: 'en', label: 'EN' },
+  { code: 'it', label: 'IT' },
 ];
 
 export const DEFAULT_LANG = 'sq';

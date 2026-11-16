@@ -27,9 +27,21 @@ jobs:
 
       - run: npm ci
 
+      - name: Note whether AI design generation is enabled
+        run: |
+          if [ -z "${{ vars.VITE_DESIGN_API_URL }}" ]; then
+            echo "::notice::Repository variable VITE_DESIGN_API_URL is not set. DESIGN WITH RENA HOME shows 'AI coming soon'. See README."
+          else
+            echo "AI design API: ${{ vars.VITE_DESIGN_API_URL }}"
+          fi
+
       # The build uses a relative base path (vite.config.js) and then verifies the paths in dist/
       # (scripts/check-dist.mjs), so the same output works on the GitHub Pages URL and a custom domain.
       - run: npm run build
+        env:
+          # Public URL of the Cloudflare Worker (Settings → Secrets and variables → Actions → Variables).
+          # Not a secret: it is visible in the website. Never put API tokens in VITE_ variables.
+          VITE_DESIGN_API_URL: ${{ vars.VITE_DESIGN_API_URL }}
 
       - uses: actions/upload-pages-artifact@v3
         with:

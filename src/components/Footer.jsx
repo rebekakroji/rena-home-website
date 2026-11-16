@@ -1,4 +1,4 @@
-import { navLinks, site } from '../data/site';
+import { navHref, navLinks, site } from '../data/site';
 import { useLanguage } from '../i18n/LanguageContext';
 import Logo from './Logo';
 import { Instagram } from './Icons';
@@ -24,7 +24,7 @@ export default function Footer() {
             <ul>
               {navLinks.map((l) => (
                 <li key={l.id}>
-                  <a href={`#${l.id}`}>{t.nav[l.id]}</a>
+                  <a href={navHref(l)}>{t.nav[l.id]}</a>
                 </li>
               ))}
             </ul>

@@ -3,7 +3,7 @@ import { DEFAULT_LANG, translations } from './translations';
 import { collections, projectGalleries } from '../data/collections';
 
 const STORAGE_KEY = 'rena-home-lang';
-const HTML_LANG = { sq: 'sq', en: 'en' };
+const HTML_LANG = { sq: 'sq', en: 'en', it: 'it' };
 
 const readStoredLang = () => {
   try {
