@@ -7,11 +7,16 @@ import Img from '../Img';
 import DesignUpload from './DesignUpload';
 import DesignOptions from './DesignOptions';
 import DesignQuote from './DesignQuote';
-import { ArrowLeft, ArrowRight, Check, Download, Sparkle } from '../Icons';
+import { ArrowLeft, ArrowRight, Check, Download, Sparkle, Upload } from '../Icons';
 
 const STEPS = ['room', 'upload', 'customize', 'result'];
 const AI_ENABLED = isDesignGenerationEnabled();
 const EXTENSIONS = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' };
+// Result notice for each non-success state (texts in translations → designStudio.result).
+const NOTICE = {
+  error: (r) => ({ title: r.errorTitle, text: r.errorText }),
+  flagged: (r) => ({ title: r.flaggedTitle, text: r.flaggedText }),
+};
 const EMPTY_CHOICES = { style: null, color: null, material: null, preferences: [] };
 
 // "DESIGN WITH RENA HOME": intro → room → photo → customize & preview → result.
@@ -99,7 +104,8 @@ export default function DesignStudio() {
       setGeneration({ status: res.status, imageUrl: res.imageUrl || null, mimeType: res.mimeType || null });
     } catch (err) {
       if (err.name === 'AbortError') return;
-      setGeneration({ status: 'error', imageUrl: null });
+      // 'flagged': the AI safety filter declined the generated image (Worker code "flagged", HTTP 422).
+      setGeneration({ status: err.code === 'flagged' ? 'flagged' : 'error', imageUrl: null });
     }
     goTo('result');
   };
@@ -114,11 +120,11 @@ export default function DesignStudio() {
     preferences: choices.preferences.length ? choices.preferences.map((p) => c.prefs[p]).join(', ') : d.none,
   };
   const summary = [
-    [d.steps.room, labels.room],
-    [c.style, labels.style],
-    [c.color, labels.color],
-    [c.material, labels.material],
-    [c.preferences, labels.preferences],
+    [d.summary.room, labels.room],
+    [d.summary.style, labels.style],
+    [d.summary.color, labels.color],
+    [d.summary.material, labels.material],
+    [d.summary.preferences, labels.preferences],
   ];
 
   if (step === 'intro') {
@@ -265,8 +271,8 @@ export default function DesignStudio() {
                       <span className="ds-notice__icon" aria-hidden="true">
                         <Sparkle width={22} height={22} />
                       </span>
-                      <h2 className="ds-notice__title">{generation.status === 'error' ? d.result.errorTitle : d.result.pendingTitle}</h2>
-                      <p>{generation.status === 'error' ? d.result.errorText : d.result.pendingText}</p>
+                      <h2 className="ds-notice__title">{NOTICE[generation.status]?.(d.result).title ?? d.result.pendingTitle}</h2>
+                      <p>{NOTICE[generation.status]?.(d.result).text ?? d.result.pendingText}</p>
                     </div>
                   </>
                 )}
@@ -350,6 +356,11 @@ export default function DesignStudio() {
                   {generation.status === 'error' && (
                     <button type="button" className="ds-link-btn" onClick={generate}>
                       <Sparkle width={16} height={16} /> {d.result.tryAgain}
+                    </button>
+                  )}
+                  {generation.status === 'flagged' && (
+                    <button type="button" className="ds-link-btn" onClick={() => goTo('upload')}>
+                      <Upload width={16} height={16} /> {d.result.changePhoto}
                     </button>
                   )}
                 </div>

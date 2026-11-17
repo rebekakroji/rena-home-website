@@ -37,9 +37,13 @@ export default function Header({ activeSection, solid }) {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
+  // Light, transparent header while it sits on the homepage video hero (top of the page, menu closed).
+  const overHero = !solid && !scrolled && !menuOpen;
 
   return (
-    <header className={`header ${scrolled || solid ? 'is-scrolled' : ''} ${menuOpen ? 'menu-open' : ''}`}>
+    <header
+      className={`header ${scrolled || solid ? 'is-scrolled' : ''} ${menuOpen ? 'menu-open' : ''} ${overHero ? 'header--hero' : ''}`}
+    >
       <div className="header__inner container">
         <Logo onClick={closeMenu} />
 

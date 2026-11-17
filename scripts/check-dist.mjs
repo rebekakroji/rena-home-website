@@ -31,12 +31,12 @@ for (const page of pages) {
   }
 }
 
-// 2) JavaScript: image paths must be built from BASE_URL, never hard-coded as "/images/...".
+// 2) JavaScript: image and video paths must be built from BASE_URL, never hard-coded as "/images/..." or "/videos/...".
 const scripts = (await readdir('dist/assets')).filter((f) => f.endsWith('.js'));
 for (const file of scripts) {
   const js = await readFile(`dist/assets/${file}`, 'utf8');
-  const hits = [...new Set(js.match(/["'`]\/images\/[^"'`]*/g) || [])];
-  for (const hit of hits) problems.push(`assets/${file}: root-absolute image path ${hit.slice(1)}`);
+  const hits = [...new Set(js.match(/["'`]\/(?:images|videos)\/[^"'`]*/g) || [])];
+  for (const hit of hits) problems.push(`assets/${file}: root-absolute media path ${hit.slice(1)}`);
 }
 
 if (problems.length) {

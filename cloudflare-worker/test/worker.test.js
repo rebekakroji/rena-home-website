@@ -89,8 +89,8 @@ test('valid request → model called with documented multipart fields; returns i
   assert.equal(c.imageBytes.length, jpeg(512, 384).length);
   assert.equal(c.width, '1024');
   assert.equal(c.height, '768');
-  assert.match(c.prompt, /^Redesign the kitchen shown in image 0/);
-  assert.match(c.prompt, /modern made-to-measure furniture and cabinetry in warm beige tones with marble surfaces/);
+  assert.match(c.prompt, /^Interior design visualisation of the kitchen in image 0\./);
+  assert.match(c.prompt, /Furnish it with modern made-to-measure cabinetry and furniture in warm beige tones with marble surfaces\./);
   assert.match(c.prompt, /Include integrated warm LED lighting and a kitchen island or peninsula\./);
 });
 
@@ -107,7 +107,8 @@ test('WEBP input accepted; options may be null / empty', async () => {
   const { env, calls } = mockEnv();
   const { status } = await call(request({ image: webpVP8X(512, 512), type: 'image/webp', options: { room: 'other', style: null, color: null, material: null, preferences: [] } }), env);
   assert.equal(status, 200);
-  assert.match(calls[0].prompt, /Redesign the interior space/);
+  assert.match(calls[0].prompt, /^Interior design visualisation of the interior space in image 0\. /);
+  assert.match(calls[0].prompt, /Furnish it with made-to-measure cabinetry and furniture\./);
   assert.doesNotMatch(calls[0].prompt, /Include/);
 });
 
@@ -205,10 +206,81 @@ test('image helpers', () => {
   assert.deepEqual(outputSize(512, 100), { width: 1024, height: 256 }); // clamped to model minimum
 });
 
-test('prompt contains only fixed phrases', () => {
+test('prompt contains only fixed phrases (exact wording)', () => {
   const p = buildPrompt(parseOptions(JSON.stringify({ room: 'wardrobe', style: 'scandinavian', color: 'wood', material: 'matte', preferences: ['glass', 'softclose', 'open'], lang: 'it' })));
   assert.equal(
     p,
-    'Redesign the walk-in wardrobe and dressing area shown in image 0 as a photorealistic interior photograph. Keep the architecture exactly as in image 0: the same walls, windows, doors, ceiling, floor area and camera perspective. Replace the furniture with elegant Scandinavian made-to-measure furniture and cabinetry in natural wood tones with matte finishes. Include glass-fronted display cabinets, soft-close drawers and open shelving. Premium, minimalist interior design, balanced natural light, realistic materials and fine detail. No people, no text, no logos, no watermark.'
+    'Interior design visualisation of the walk-in wardrobe and dressing area in image 0. Keep the same room layout, walls, windows, doors, ceiling and camera angle as image 0. Furnish it with Scandinavian made-to-measure cabinetry and furniture in natural wood tones with matte finishes. Include glass-fronted display cabinets, soft-close drawers and open shelving. Empty, tidy room, professional architectural interior photography, soft natural daylight, realistic materials.'
   );
+  const kitchen = buildPrompt(parseOptions(JSON.stringify({ room: 'kitchen', style: 'modern', color: 'beige', material: 'wood', preferences: ['lighting'] })));
+  assert.equal(
+    kitchen,
+    'Interior design visualisation of the kitchen in image 0. Keep the same room layout, walls, windows, doors, ceiling and camera angle as image 0. Furnish it with modern made-to-measure cabinetry and furniture in warm beige tones with solid wood finishes. Include integrated warm LED lighting. Empty, tidy room, professional architectural interior photography, soft natural daylight, realistic materials.'
+  );
+});
+
+test('prompt wording is positive and neutral for every combination', () => {
+  const rooms = ['kitchen', 'living', 'bedroom', 'wardrobe', 'other'];
+  const styles = [null, 'modern', 'minimalist', 'luxury', 'scandinavian'];
+  const prefs = ['lighting', 'handleless', 'island', 'storage', 'appliances', 'glass', 'softclose', 'open'];
+  let n = 0;
+  for (const room of rooms) for (const style of styles) for (const color of [null, 'white', 'black', 'wood']) for (const material of [null, 'marble', 'glossy']) {
+    const p = buildPrompt(parseOptions(JSON.stringify({ room, style, color, material, preferences: prefs })));
+    n++;
+    assert.doesNotMatch(p, /\b(no|not|without|never|people|person|human|text|logos?|watermark|luxurious)\b/i, p);
+    assert.match(p, /Keep the same room layout, walls, windows, doors, ceiling and camera angle as image 0\./);
+    assert.match(p, /Empty, tidy room, professional architectural interior photography/);
+  }
+  assert.equal(n, 300);
+});
+
+test('AI safety filter (3030 / flagged) → 422 with code "flagged", CORS, no internal details', async () => {
+  for (const msg of [
+    '3030: Your output has been flagged. Please choose another prompt / input image combination.',
+    'AiError: 3030: Your output has been flagged.',
+    'Your output has been flagged',
+  ]) {
+    const { env, calls } = mockEnv({ aiError: new Error(msg) });
+    const r = await call(request(), env);
+    assert.equal(r.status, 422, msg);
+    assert.equal(r.body.code, 'flagged');
+    assert.match(r.body.error, /different photo or other design options/);
+    assert.equal(r.cors, ORIGIN);
+    assert.doesNotMatch(r.body.error, /3030|prompt \/ input image/);
+    assert.equal(calls.length, 1, 'model was called exactly once — no automatic retry');
+  }
+  // Other errors keep their mapping and now carry a code as well.
+  const quota = await call(request(), mockEnv({ aiError: new Error('3036: daily free allocation of 10,000 neurons used') }).env);
+  assert.deepEqual([quota.status, quota.body.code], [503, 'limit']);
+  const other = await call(request(), mockEnv({ aiError: new Error('InferenceUpstreamError') }).env);
+  assert.deepEqual([other.status, other.body.code], [502, 'model_error']);
+});
+
+test('logs contain option ids only — never the photo, image data or IP address', async () => {
+  const lines = [];
+  const orig = { log: console.log, error: console.error };
+  console.log = (...a) => lines.push(['log', a.join(' ')]);
+  console.error = (...a) => lines.push(['error', a.join(' ')]);
+  try {
+    const req = request({ options: { room: 'bedroom', style: 'luxury', color: 'black', material: 'glossy', preferences: ['lighting', 'open'], lang: 'it' } });
+    req.headers.set('CF-Connecting-IP', '198.51.100.23');
+    await call(req, mockEnv().env); // success
+    await call(request(), mockEnv({ aiError: new Error('3030: Your output has been flagged.') }).env); // flagged
+  } finally {
+    Object.assign(console, orig);
+  }
+  const events = lines.map(([level, text]) => ({ level, text, json: JSON.parse(text) }));
+  assert.deepEqual(events.map((e) => e.json.event), ['design.request', 'design.generated', 'design.request', 'design.error']);
+  const req0 = events[0].json;
+  assert.deepEqual(
+    { room: req0.room, style: req0.style, color: req0.color, material: req0.material, preferences: req0.preferences, input: req0.input, output: req0.output },
+    { room: 'bedroom', style: 'luxury', color: 'black', material: 'glossy', preferences: ['lighting', 'open'], input: '512x384', output: '1024x768' }
+  );
+  assert.equal(events[3].json.code, 'flagged');
+  assert.equal(events[3].level, 'error');
+  for (const e of events) {
+    assert.ok(e.text.length < 400, 'log line is small (no image data)');
+    assert.doesNotMatch(e.text, /198\.51\.100\.23|base64|imageBase64|\/9j\/|input_image|prompt/i);
+    assert.deepEqual(Object.keys(e.json).filter((k) => !['event', 'room', 'style', 'color', 'material', 'preferences', 'input', 'output', 'code', 'message', 'mimeType'].includes(k)), []);
+  }
 });

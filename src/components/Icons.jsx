@@ -17,6 +17,9 @@ export const ArrowRight = (p) => (
 export const ArrowLeft = (p) => (
   <svg {...base} {...p}><path d="M20 12H5M11 6l-6 6 6 6" /></svg>
 );
+export const ArrowDown = (p) => (
+  <svg {...base} {...p}><path d="M12 4v15M6.5 13.5 12 19l5.5-5.5" /></svg>
+);
 export const ArrowUpRight = (p) => (
   <svg {...base} {...p}><path d="M7 17 17 7M8 7h9v9" /></svg>
 );
@@ -63,6 +66,24 @@ export const Sparkle = (p) => (
   <svg {...base} {...p}>
     <path d="M12 3.5c.6 3.9 2.6 5.9 6.5 6.5-3.9.6-5.9 2.6-6.5 6.5-.6-3.9-2.6-5.9-6.5-6.5 3.9-.6 5.9-2.6 6.5-6.5Z" />
     <path d="M18.5 15.5c.25 1.6 1 2.35 2.5 2.5-1.5.15-2.25.9-2.5 2.5-.25-1.6-1-2.35-2.5-2.5 1.5-.15 2.25-.9 2.5-2.5Z" />
+  </svg>
+);
+export const Play = (p) => (
+  <svg {...base} {...p}><path d="M8 5.5v13l10.5-6.5L8 5.5Z" fill="currentColor" /></svg>
+);
+export const Pause = (p) => (
+  <svg {...base} {...p}><path d="M8.5 5.5v13M15.5 5.5v13" strokeWidth={2.25} /></svg>
+);
+export const SoundOn = (p) => (
+  <svg {...base} {...p}>
+    <path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4Z" />
+    <path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" />
+  </svg>
+);
+export const SoundOff = (p) => (
+  <svg {...base} {...p}>
+    <path d="M4 9.5v5h3.5L12 18.5v-13L7.5 9.5H4Z" />
+    <path d="m15.5 9.5 5 5M20.5 9.5l-5 5" />
   </svg>
 );
 export const Mail = (p) => (

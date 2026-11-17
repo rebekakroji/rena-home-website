@@ -86,6 +86,25 @@ export const collections = [
       img('projects', 'projekt6.jpeg', 1179, 1546),
     ],
   },
+  {
+    // Hotel rooms. Ordered so related rooms sit together: the sea-view hotel in oak and linen (cover),
+    // then the warm evening-lit room designs, the oak wardrobes, and finally the lighter rooms with
+    // burgundy and coral accents.
+    slug: 'hotel-collection',
+    cover: 0,
+    images: [
+      img('hotel-collection', 'hotel4.jpeg', 1320, 957),
+      img('hotel-collection', 'hotel1.jpeg', 1216, 1600),
+      img('hotel-collection', 'hotel2.jpeg', 1298, 1600),
+      img('hotel-collection', 'hotel3.jpeg', 1228, 1600),
+      img('hotel-collection', 'hotel10.jpeg', 900, 1600),
+      img('hotel-collection', 'hotel5.jpeg', 1200, 1498),
+      img('hotel-collection', 'hotel7.jpeg', 1200, 1500),
+      img('hotel-collection', 'hotel6.jpeg', 1200, 1500),
+      img('hotel-collection', 'hotel9.jpeg', 1320, 1311),
+      img('hotel-collection', 'hotel8.jpeg', 1320, 1304),
+    ],
+  },
 ];
 
 // Completed projects, shown as identical cards on their parent collection page

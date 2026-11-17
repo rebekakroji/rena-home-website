@@ -61,7 +61,13 @@ metadata (GPS) stripped           multipart    image dimensions and option ids; 
 - The photo stays in the browser until the visitor clicks **Generate my design**; the privacy notes on the page say so
   in all three languages. Neither the Worker nor RENA HOME stores photos (no database, no storage).
 - The prompt is assembled server-side from fixed English phrases; only option ids are accepted, so visitors cannot send
-  free text to the model.
+  free text to the model. The wording is positive and neutral ("Empty, tidy room, professional architectural interior
+  photography…") because FLUX models do not support negative instructions such as "no people".
+- The provider's **AI safety filter stays fully enabled**. If it declines a generated image (Workers AI error `3030`,
+  "output has been flagged"), the Worker returns **422 `{ code: "flagged" }`** and the page asks the visitor — in AL, EN
+  and IT — to try a different photo or other options. There is no automatic retry.
+- Worker logs (Cloudflare Workers Logs) contain only option ids and image sizes (`design.request`, `design.generated`,
+  `design.error` with `code`) — never the photo, image data, prompt or the visitor's IP address.
 
 ### Cost and free quota
 

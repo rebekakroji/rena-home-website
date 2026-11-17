@@ -25,7 +25,7 @@ const sq = {
     kryefaqja: 'Kryefaqja',
     koleksionet: 'Koleksionet',
     projektet: 'Projektet',
-    dizajno: 'Dizajno',
+    dizajno: 'Krijo dizajnin tënd',
     'rreth-nesh': 'Rreth nesh',
     kontakt: 'Kontakt',
   },
@@ -44,20 +44,38 @@ const sq = {
     aria: 'RENA HOME — Kryefaqja',
   },
 
+  // Full-screen video hero. The tagline is the brand signature and stays in English in every language.
   hero: {
-    eyebrow: 'Mobileri & arredim i brendshëm',
-    since: (year) => `që nga ${year}`,
-    line1: 'Eleganca',
-    line2: { before: 'fillon ', em: 'në shtëpi.' },
-    lead: 'Mobilje të menduara për të krijuar ambiente që reflektojnë stilin dhe personalitetin tuaj.',
-    ctaCollections: 'Eksploro koleksionet',
-    ctaProjects: 'Shiko projektet',
-    metaSince: 'Që nga',
-    metaLocation: 'Vendndodhja',
-    metaHours: 'Orari',
-    insetCaption: 'Sallone',
-    scroll: 'Lëviz poshtë',
-    scrollAria: 'Lëviz te seksioni Rreth nesh',
+    tagline: 'Crafted for the way you live.',
+    lead: 'Mobilje të krijuara me kujdes, për ambiente që reflektojnë stilin tënd.',
+    scrollAria: 'Lëviz poshtë te seksioni tjetër',
+  },
+
+  // Homepage promotion of the AI design studio (#/dizajno), right after the hero.
+  promo: {
+    badge: 'Risi e re',
+    title: ['Shtëpia jote.', 'Idetë e tua.', 'Një dizajn i ri.'],
+    text: 'Ngarko një foto të ambientit tënd dhe zbulo si mund të transformohet me ndihmën e inteligjencës artificiale, sipas stilit dhe preferencave të tua.',
+    cta: 'Provoje tani',
+    note: 'Eksploro mundësitë e reja të arredimit me RENA HOME.',
+  },
+
+  // Floating button above WhatsApp that opens the design studio.
+  designFab: {
+    label: 'Krijo dizajnin tënd',
+  },
+
+  // "The art of woodworking": workshop video section on the homepage.
+  craft: {
+    eyebrow: 'Arti i punimit të drurit',
+    title: ['Çdo krijim fillon me një ide.', 'Perfeksionohet në çdo detaj.'],
+    text: 'Në RENA HOME, druri nuk është thjesht material. Është baza e krijimeve tona, ku teknologjia moderne, mjeshtëria dhe përkushtimi ndaj detajeve bashkohen për të sjellë mobilje me karakter dhe cilësi.',
+    caption: 'Nga punishtja jonë',
+    videoLabel: 'Video nga punishtja e RENA HOME: përpunimi me makineri CNC dhe panele druri lisi të gdhendura',
+    play: 'Luaj videon',
+    pause: 'Ndalo videon',
+    soundOn: 'Aktivizo zërin',
+    soundOff: 'Çaktivizo zërin',
   },
 
   about: {
@@ -85,7 +103,7 @@ const sq = {
 
   collectionsSection: {
     eyebrow: 'Koleksionet',
-    title: { before: 'Pesë hapësira, ', em: 'një filozofi', after: '.' },
+    title: { before: 'Gjashtë hapësira, ', em: 'një filozofi', after: '.' },
     text: 'Zgjidhni një koleksion dhe zbuloni ambientet tona, nga qetësia e dhomës së gjumit deri te ngrohtësia e sallonit.',
   },
 
@@ -213,54 +231,55 @@ const sq = {
 
   // DESIGN WITH RENA HOME (#/dizajno). The title stays in English in every language.
   designStudio: {
-    docTitle: 'DESIGN WITH RENA HOME — RENA HOME',
-    eyebrow: 'Studio dizajni',
-    title: 'DESIGN WITH RENA HOME',
-    subtitle: 'Transformoni hapësirën tuaj. Vizualizoni idetë tuaja.',
+    docTitle: 'KRIJO ME RENA HOME — RENA HOME',
+    eyebrow: 'Krijo dizajnin tënd',
+    title: 'KRIJO ME RENA HOME',
+    subtitle: 'Transformo hapësirën tënde. Vizualizo idetë e tua.',
     intro:
-      'Ngarkoni një foto të ambientit tuaj, zgjidhni stilin, ngjyrat dhe materialet që ju pëlqejnë dhe shikoni si mund ta transformojnë mobiljet RENA HOME. Më pas, ekipi ynë i kthen idetë tuaja në një projekt me porosi.',
-    introPoints: ['Zgjidhni hapësirën', 'Ngarkoni një foto', 'Personalizoni stilin dhe materialet', 'Kërkoni një ofertë'],
+      'Ngarko një foto të ambientit tënd, zgjidh stilin, ngjyrat dhe materialet që të pëlqejnë dhe shiko si mund ta transformojnë mobiljet RENA HOME. Më pas, ekipi ynë i kthen idetë e tua në një projekt me porosi.',
+    introPoints: ['Zgjidh hapësirën', 'Ngarko një foto', 'Zgjidh stilin dhe materialet', 'Kërko ofertë'],
     badge: 'Vizualizim me AI · së shpejti',
     badgeLive: 'Vizualizim me AI',
-    start: 'Filloni dizajnin',
+    start: 'Fillo dizajnin',
     stepsAria: 'Hapat e dizajnit',
     stepLabel: (n, total) => `Hapi ${n} nga ${total}`,
-    steps: { room: 'Hapësira', upload: 'Fotoja', customize: 'Personalizimi', result: 'Dizajni juaj' },
+    steps: { room: 'Hapësira', upload: 'Fotoja', customize: 'Personalizo', result: 'Dizajni yt' },
     back: 'Kthehu',
     next: 'Vazhdo',
     restart: 'Fillo nga e para',
     notSelected: 'Pa zgjedhur',
     none: 'Asnjë',
+    summary: { room: 'Hapësira', style: 'Stili', color: 'Ngjyra', material: 'Materiali', preferences: 'Preferencat' },
     room: {
-      title: 'Cilën hapësirë po dizajnoni?',
-      text: 'Zgjidhni ambientin që dëshironi të transformoni.',
+      title: 'Cilën hapësirë do të dizajnosh?',
+      text: 'Zgjidh ambientin që dëshiron të transformosh.',
       options: { kitchen: 'Kuzhinë', living: 'Sallon', bedroom: 'Dhomë gjumi', wardrobe: 'Garderobë', other: 'Hapësirë tjetër' },
     },
     upload: {
-      title: 'Ngarkoni një foto të hapësirës suaj',
+      title: 'Ngarko një foto të hapësirës',
       text: 'Një foto e ndriçuar mirë, e bërë nga përballë, jep rezultatin më të mirë.',
-      privacy: 'Fotoja juaj mbetet në shfletuesin tuaj. Nuk ngarkohet dhe nuk ruhet askund.',
+      privacy: 'Fotoja jote mbetet në shfletuesin tënd. Nuk ngarkohet dhe nuk ruhet askund.',
       privacyAi:
-        'Fotoja mbetet në shfletuesin tuaj derisa të klikoni “Gjeneroni dizajnin tim”. Atëherë një kopje e zvogëluar (maks. 512 px, pa të dhëna vendndodhjeje) dërgohet te Cloudflare Workers AI për të krijuar dizajnin. RENA HOME nuk e ruan foton tuaj.',
-      drop: 'Tërhiqni dhe lëshoni foton këtu',
-      dropActive: 'Lëshojeni për ta ngarkuar',
+        'Fotoja mbetet në shfletuesin tënd derisa të klikosh “Gjenero dizajnin”. Atëherë një kopje e zvogëluar (maks. 512 px, pa të dhëna vendndodhjeje) dërgohet te Cloudflare Workers AI për të krijuar dizajnin. RENA HOME nuk e ruan foton tënde.',
+      drop: 'Tërhiq dhe lësho foton këtu',
+      dropActive: 'Lëshoje për ta ngarkuar',
       or: 'ose',
-      browse: 'Zgjidhni një foto',
+      browse: 'Zgjidh një foto',
       formats: 'JPG, JPEG, PNG ose WEBP · deri në 15 MB',
-      replace: 'Zëvendësoni',
-      remove: 'Hiqni',
-      previewAlt: 'Fotoja e ngarkuar e hapësirës suaj',
-      errorType: 'Ju lutemi zgjidhni një foto JPG, JPEG, PNG ose WEBP.',
-      errorSize: 'Kjo foto është më e madhe se 15 MB. Ju lutemi zgjidhni një më të vogël.',
-      errorRead: 'Kjo foto nuk mund të hapet. Provoni një foto tjetër.',
+      replace: 'Zëvendëso',
+      remove: 'Hiq',
+      previewAlt: 'Fotoja e ngarkuar e hapësirës sate',
+      errorType: 'Zgjidh një foto JPG, JPEG, PNG ose WEBP.',
+      errorSize: 'Kjo foto është më e madhe se 15 MB. Zgjidh një foto më të vogël.',
+      errorRead: 'Kjo foto nuk mund të hapet. Provo një foto tjetër.',
     },
     customize: {
-      title: 'Personalizoni dizajnin tuaj',
-      style: 'Stili i interierit',
+      title: 'Personalizo dizajnin',
+      style: 'Zgjidh stilin',
       color: 'Ngjyra e mobiljeve',
       material: 'Materiali',
       preferences: 'Preferenca shtesë',
-      preferencesHint: 'Zgjidhni sa të doni.',
+      preferencesHint: 'Zgjidh sa të duash.',
       styles: { modern: 'Modern', minimalist: 'Minimalist', luxury: 'Luksoz', scandinavian: 'Skandinav' },
       colors: { white: 'E bardhë', beige: 'Bezhë', grey: 'Gri', black: 'E zezë', brown: 'Kafe', wood: 'Dru natyral' },
       materials: { wood: 'Dru', mdf: 'MDF', marble: 'Mermer', matte: 'Mat', glossy: 'Me shkëlqim' },
@@ -274,28 +293,33 @@ const sq = {
         softclose: 'Sirtarë me mbyllje të butë',
         open: 'Rafte të hapura',
       },
-      generate: 'Gjeneroni dizajnin tim',
+      generate: 'Gjenero dizajnin',
       generating: 'Duke gjeneruar…',
       aiNotice: 'Fotoja do të dërgohet te Cloudflare Workers AI për përpunim.',
     },
     result: {
-      title: 'Dizajni juaj',
+      title: 'Dizajni yt',
       pendingTitle: 'Gjenerimi i dizajnit me AI vjen së shpejti',
       pendingText:
-        'Vizualizimi me AI do të aktivizohet sapo të lidhet shërbimi ynë i gjenerimit të imazheve. Fotoja dhe zgjedhjet tuaja janë gati — kërkoni një ofertë dhe dizajnerët tanë do ta përgatisin propozimin tuaj personalisht.',
+        'Vizualizimi me AI do të aktivizohet sapo të lidhet shërbimi ynë i gjenerimit të imazheve. Fotoja dhe zgjedhjet e tua janë gati — kërko ofertë dhe dizajnerët tanë do ta përgatisin propozimin tënd personalisht.',
       errorTitle: 'Dizajni nuk mund të gjenerohej',
-      errorText: 'Provoni përsëri pas pak, ose kërkoni një ofertë dhe ekipi ynë do t’ju ndihmojë drejtpërdrejt.',
-      generatedAlt: 'Dizajn i gjeneruar me AI për hapësirën tuaj',
-      download: 'Shkarkoni dizajnin',
+      errorText: 'Provo përsëri pas pak, ose kërko ofertë dhe ekipi ynë do të të ndihmojë drejtpërdrejt.',
+      flaggedTitle: 'Ky dizajn nuk mund të krijohej',
+      flaggedText:
+        'Filtri i sigurisë së AI-së nuk e lejoi imazhin e krijuar për këtë kombinim. Provo një foto tjetër të ambientit ose ndrysho stilin, ngjyrën apo materialin dhe gjeneroje përsëri.',
+      changePhoto: 'Ndrysho foton',
+      generatedAlt: 'Dizajn i krijuar me AI për hapësirën tënde',
+      download: 'Shkarko dizajnin',
       downloadHint: 'Shkarkimi bëhet i mundur pasi të gjenerohet dizajni.',
-      quote: 'Kërkoni një ofertë',
-      quoteChoose: 'Zgjidhni një numër WhatsApp',
-      quoteHint: 'Zgjedhjet tuaja shtohen automatikisht në mesazh. Foton e ambientit mund ta dërgoni në bisedë.',
-      edit: 'Ndryshoni zgjedhjet',
-      tryAgain: 'Provoni përsëri',
+      quote: 'Kërko ofertë',
+      quoteChoose: 'Zgjidh një numër WhatsApp',
+      quoteHint: 'Zgjedhjet e tua shtohen automatikisht në mesazh. Foton e ambientit mund ta dërgosh në bisedë.',
+      edit: 'Ndrysho zgjedhjet',
+      tryAgain: 'Provo përsëri',
     },
+    // Written in the customer's own voice; it is sent to RENA HOME on WhatsApp.
     quoteMessage: ({ room, style, color, material, preferences }) =>
-      `Përshëndetje RENA HOME,\n\nDëshiroj një ofertë për një dizajn me këto preferenca (DESIGN WITH RENA HOME):\n• Hapësira: ${room}\n• Stili: ${style}\n• Ngjyra: ${color}\n• Materiali: ${material}\n• Preferencat: ${preferences}\n\nDo t’ju dërgoj një foto të ambientit në këtë bisedë.`,
+      `Përshëndetje RENA HOME,\n\nDëshiroj një ofertë për një dizajn me këto preferenca (KRIJO ME RENA HOME):\n• Hapësira: ${room}\n• Stili: ${style}\n• Ngjyra: ${color}\n• Materiali: ${material}\n• Preferencat: ${preferences}\n\nDo t’ju dërgoj një foto të ambientit në këtë bisedë.`,
   },
 
   // Collection texts, keyed by slug. Image descriptions are keyed by file name.
@@ -395,6 +419,25 @@ const sq = {
         'projekt6.jpeg': 'Pamje nga lart e një tavoline travertini në dritën e mëngjesit',
       },
     },
+    // The name "Hotel Collection" stays the same in every language.
+    'hotel-collection': {
+      name: 'Hotel Collection',
+      tagline: 'Mikpritje e projektuar me kujdes',
+      description:
+        'Mobilje me porosi për dhoma hoteli: koka krevati të veshura, panele druri, tavolina pune, garderoba dhe ndriçim i integruar, të menduara për rehati dhe qëndrueshmëri.',
+      alts: {
+        'hotel4.jpeg': 'Dhomë hoteli me pamje nga deti: krevat dopio me kokë të veshur, panele druri lisi dhe ballkon',
+        'hotel1.jpeg': 'Detaj i kokës së krevatit e veshur me tekstil bezhë dhe kornizë lëkure, pranë një komodine varëse prej lisi',
+        'hotel2.jpeg': 'Panele muri prej lisi me ndriçim LED mbi kokën e veshur të krevatit dhe një llambë leximi',
+        'hotel3.jpeg': 'Dhomë me dy shtretër, tavolinë pune prej druri me pasqyrë, karrige e veshur dhe parket',
+        'hotel10.jpeg': 'Mur televizori me panele me kanale, tavolinë e gjatë varëse prej druri dhe ndriçim i integruar',
+        'hotel5.jpeg': 'Dhomë hoteli me dy shtretër në dritën e mbrëmjes, me panel televizori të ndriçuar dhe stol për bagazhe',
+        'hotel7.jpeg': 'Garderobë hyrjeje prej druri me kamare të hapura, ndriçim LED dhe stol',
+        'hotel6.jpeg': 'Garderobë e hapur prej druri me rafte të ndriçuara dhe sirtarë',
+        'hotel9.jpeg': 'Dhomë dopio me krevat të veshur në ngjyrë kafe të çelur, perde bordo dhe divan',
+        'hotel8.jpeg': 'Dhomë hoteli me dollap, tavolinë pune, panel televizori dhe pasqyrë',
+      },
+    },
   },
 
   // Project cards on the "Projekte të realizuara" page, keyed by slug.
@@ -470,19 +513,33 @@ const en = {
   },
 
   hero: {
-    eyebrow: 'Furniture & interior design',
-    since: (year) => `since ${year}`,
-    line1: 'Elegance',
-    line2: { before: 'begins ', em: 'at home.' },
-    lead: 'Thoughtfully designed furniture that creates spaces reflecting your style and personality.',
-    ctaCollections: 'Explore collections',
-    ctaProjects: 'View projects',
-    metaSince: 'Since',
-    metaLocation: 'Location',
-    metaHours: 'Hours',
-    insetCaption: 'Living rooms',
-    scroll: 'Scroll down',
-    scrollAria: 'Scroll to the About section',
+    tagline: 'Crafted for the way you live.',
+    lead: 'Furniture made with care, for spaces that reflect your style.',
+    scrollAria: 'Scroll down to the next section',
+  },
+
+  promo: {
+    badge: 'New',
+    title: ['Your home.', 'Your ideas.', 'A new design.'],
+    text: 'Upload a photo of your space and discover how it could be transformed with the help of artificial intelligence, according to your style and preferences.',
+    cta: 'Try it now',
+    note: 'Explore new furnishing possibilities with RENA HOME.',
+  },
+
+  designFab: {
+    label: 'Create your design',
+  },
+
+  craft: {
+    eyebrow: 'The art of woodworking',
+    title: ['Every creation begins with an idea.', 'It is perfected in every detail.'],
+    text: 'At RENA HOME, wood is more than a material. It is the foundation of everything we create — where modern technology, craftsmanship and devotion to detail come together to make furniture of character and quality.',
+    caption: 'From our workshop',
+    videoLabel: 'Video from the RENA HOME workshop: CNC machining and carved oak panels',
+    play: 'Play video',
+    pause: 'Pause video',
+    soundOn: 'Turn sound on',
+    soundOff: 'Turn sound off',
   },
 
   about: {
@@ -510,7 +567,7 @@ const en = {
 
   collectionsSection: {
     eyebrow: 'Collections',
-    title: { before: 'Five spaces, ', em: 'one philosophy', after: '.' },
+    title: { before: 'Six spaces, ', em: 'one philosophy', after: '.' },
     text: 'Choose a collection and discover our spaces, from the calm of the bedroom to the warmth of the living room.',
   },
 
@@ -653,6 +710,7 @@ const en = {
     restart: 'Start over',
     notSelected: 'Not selected',
     none: 'None',
+    summary: { room: 'Space', style: 'Interior style', color: 'Furniture colour', material: 'Material', preferences: 'Additional preferences' },
     room: {
       title: 'Which space are you designing?',
       text: 'Choose the room you would like to transform.',
@@ -707,6 +765,10 @@ const en = {
         'The AI visualisation will be activated once our image-generation service is connected. Your photo and selections are ready — request a quote and our designers will prepare your proposal personally.',
       errorTitle: 'The design could not be generated',
       errorText: 'Please try again in a moment, or request a quote and our team will help you directly.',
+      flaggedTitle: 'This design couldn’t be created',
+      flaggedText:
+        'The AI safety filter didn’t allow the image generated for this combination. Try a different photo of your space, or change the style, colour or material, and generate again.',
+      changePhoto: 'Change photo',
       generatedAlt: 'AI-generated design of your space',
       download: 'Download design',
       downloadHint: 'Downloading becomes available once a design has been generated.',
@@ -815,6 +877,24 @@ const en = {
         'projekt6.jpeg': 'Overhead view of a travertine table in the morning light',
       },
     },
+    'hotel-collection': {
+      name: 'Hotel Collection',
+      tagline: 'Hospitality, carefully designed',
+      description:
+        'Made-to-measure furniture for hotel rooms: upholstered headboards, wood panelling, desks, wardrobes and integrated lighting, designed for comfort and durability.',
+      alts: {
+        'hotel4.jpeg': 'Hotel room with a sea view: double bed with an upholstered headboard, oak wall panels and a balcony',
+        'hotel1.jpeg': 'Detail of a headboard in beige fabric with a leather frame, beside a floating oak nightstand',
+        'hotel2.jpeg': 'Oak wall panelling with LED lighting above an upholstered headboard and a reading light',
+        'hotel3.jpeg': 'Twin room with a wooden desk and mirror, an upholstered chair and herringbone parquet',
+        'hotel10.jpeg': 'TV wall with fluted panels, a long floating wooden desk and integrated lighting',
+        'hotel5.jpeg': 'Twin hotel room in evening light, with a backlit TV panel and a luggage bench',
+        'hotel7.jpeg': 'Entrance wardrobe in wood with open niches, LED lighting and a bench',
+        'hotel6.jpeg': 'Walk-in wardrobe in wood with illuminated shelves and drawers',
+        'hotel9.jpeg': 'Double room with a taupe upholstered bed, burgundy curtains and a sofa',
+        'hotel8.jpeg': 'Hotel room with a wardrobe, desk, TV panel and mirror',
+      },
+    },
   },
 
   projectGalleries: {
@@ -889,19 +969,33 @@ const it = {
   },
 
   hero: {
-    eyebrow: 'Arredamento & interior design',
-    since: (year) => `dal ${year}`,
-    line1: 'L’eleganza',
-    line2: { before: 'inizia ', em: 'a casa.' },
-    lead: 'Arredi pensati per creare ambienti che rispecchiano il vostro stile e la vostra personalità.',
-    ctaCollections: 'Scopri le collezioni',
-    ctaProjects: 'Guarda i progetti',
-    metaSince: 'Dal',
-    metaLocation: 'Sede',
-    metaHours: 'Orari',
-    insetCaption: 'Soggiorni',
-    scroll: 'Scorri',
-    scrollAria: 'Vai alla sezione Chi siamo',
+    tagline: 'Crafted for the way you live.',
+    lead: 'Arredi realizzati con cura, per ambienti che rispecchiano il vostro stile.',
+    scrollAria: 'Scorri alla sezione successiva',
+  },
+
+  promo: {
+    badge: 'Novità',
+    title: ['La vostra casa.', 'Le vostre idee.', 'Un nuovo design.'],
+    text: 'Caricate una foto del vostro ambiente e scoprite come potrebbe trasformarsi con l’aiuto dell’intelligenza artificiale, secondo il vostro stile e le vostre preferenze.',
+    cta: 'Provatelo ora',
+    note: 'Esplorate nuove possibilità di arredo con RENA HOME.',
+  },
+
+  designFab: {
+    label: 'Create il vostro progetto',
+  },
+
+  craft: {
+    eyebrow: 'L’arte della lavorazione del legno',
+    title: ['Ogni creazione nasce da un’idea.', 'Si perfeziona in ogni dettaglio.'],
+    text: 'Per RENA HOME il legno non è un semplice materiale. È la base di ogni nostra creazione, dove tecnologia moderna, maestria artigianale e cura del dettaglio si uniscono per dare vita ad arredi di carattere e qualità.',
+    caption: 'Dal nostro laboratorio',
+    videoLabel: 'Video dal laboratorio RENA HOME: lavorazione a controllo numerico e pannelli in rovere intagliati',
+    play: 'Riproduci il video',
+    pause: 'Metti in pausa il video',
+    soundOn: 'Attiva l’audio',
+    soundOff: 'Disattiva l’audio',
   },
 
   about: {
@@ -929,7 +1023,7 @@ const it = {
 
   collectionsSection: {
     eyebrow: 'Collezioni',
-    title: { before: 'Cinque spazi, ', em: 'un’unica filosofia', after: '.' },
+    title: { before: 'Sei spazi, ', em: 'un’unica filosofia', after: '.' },
     text: 'Scegliete una collezione e scoprite i nostri ambienti, dalla quiete della camera da letto al calore del soggiorno.',
   },
 
@@ -1073,6 +1167,7 @@ const it = {
     restart: 'Ricomincia',
     notSelected: 'Non selezionato',
     none: 'Nessuna',
+    summary: { room: 'Spazio', style: 'Stile d’interni', color: 'Colore degli arredi', material: 'Materiale', preferences: 'Preferenze aggiuntive' },
     room: {
       title: 'Quale spazio state progettando?',
       text: 'Scegliete l’ambiente che desiderate trasformare.',
@@ -1127,6 +1222,10 @@ const it = {
         'La visualizzazione con l’IA sarà attivata non appena verrà collegato il nostro servizio di generazione delle immagini. La vostra foto e le vostre scelte sono pronte: richiedete un preventivo e i nostri designer prepareranno personalmente la vostra proposta.',
       errorTitle: 'Non è stato possibile generare il progetto',
       errorText: 'Riprovate tra poco, oppure richiedete un preventivo e il nostro team vi aiuterà direttamente.',
+      flaggedTitle: 'Non è stato possibile creare questo progetto',
+      flaggedText:
+        'Il filtro di sicurezza dell’IA non ha consentito l’immagine generata per questa combinazione. Provate con un’altra foto del vostro ambiente oppure cambiate stile, colore o materiale e generate di nuovo.',
+      changePhoto: 'Cambia foto',
       generatedAlt: 'Progetto del vostro spazio generato con l’IA',
       download: 'Scarica il progetto',
       downloadHint: 'Il download sarà disponibile dopo la generazione del progetto.',
@@ -1235,6 +1334,24 @@ const it = {
         'projekt4.jpeg': 'Bancone da cucina con mobili in legno, piano in marmo e mensola illuminata',
         'projekt5.jpeg': 'Zona pranzo con tavolo ovale in travertino e sedie in legno di fronte alle finestre',
         'projekt6.jpeg': 'Vista dall’alto di un tavolo in travertino nella luce del mattino',
+      },
+    },
+    'hotel-collection': {
+      name: 'Hotel Collection',
+      tagline: 'Ospitalità progettata con cura',
+      description:
+        'Arredi su misura per camere d’albergo: testiere imbottite, boiserie in legno, scrittoi, armadi e illuminazione integrata, pensati per comfort e durata.',
+      alts: {
+        'hotel4.jpeg': 'Camera d’albergo vista mare: letto matrimoniale con testiera imbottita, pannelli in rovere e balcone',
+        'hotel1.jpeg': 'Dettaglio di una testiera in tessuto beige con cornice in pelle, accanto a un comodino sospeso in rovere',
+        'hotel2.jpeg': 'Boiserie in rovere con luce LED sopra la testiera imbottita e una lampada da lettura',
+        'hotel3.jpeg': 'Camera doppia con scrittoio in legno e specchio, sedia imbottita e parquet a spina di pesce',
+        'hotel10.jpeg': 'Parete TV con pannelli cannettati, lungo scrittoio sospeso in legno e illuminazione integrata',
+        'hotel5.jpeg': 'Camera d’albergo doppia nella luce della sera, con pannello TV retroilluminato e panca portabagagli',
+        'hotel7.jpeg': 'Guardaroba d’ingresso in legno con nicchie a giorno, illuminazione LED e panca',
+        'hotel6.jpeg': 'Cabina armadio in legno con ripiani illuminati e cassetti',
+        'hotel9.jpeg': 'Camera matrimoniale con letto imbottito color tortora, tende bordeaux e divano',
+        'hotel8.jpeg': 'Camera d’albergo con armadio, scrittoio, pannello TV e specchio',
       },
     },
   },

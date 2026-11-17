@@ -14,7 +14,7 @@
 //     image    the room photo, resized here to max 512×512 (JPEG)
 //     options  JSON: { room, style, color, material, preferences: string[], lang }
 //   200 → JSON { imageBase64, mimeType }   (an { imageUrl } response is also accepted)
-//   4xx/5xx → JSON { error }
+//   4xx/5xx → JSON { error, code? }   — code "flagged" (422): the AI safety filter declined the output
 
 const ENDPOINT = (import.meta.env.VITE_DESIGN_API_URL || '').trim();
 
@@ -90,12 +90,18 @@ export async function generateDesign({ image, room, style, color, material, pref
   const res = await fetch(ENDPOINT, { method: 'POST', body, signal });
   if (!res.ok) {
     let message = `HTTP ${res.status}`;
+    let code = null;
     try {
-      message = (await res.json()).error || message;
+      const data = await res.json();
+      message = data.error || message;
+      code = data.code || null; // "flagged" = declined by the AI safety filter
     } catch {
       /* non-JSON error body */
     }
-    throw new Error(message);
+    const error = new Error(message);
+    error.status = res.status;
+    error.code = code;
+    throw error;
   }
 
   const data = await res.json();

@@ -29,6 +29,15 @@ export const site = {
   logo: `${BASE}images/logo/rena-logo.jpeg`,
 };
 
+// Videos in public/videos/ (H.264, 576×1024 portrait, "faststart" so playback begins while loading).
+// Posters are the frames shown before the video plays.
+export const videos = {
+  // Showroom walk-through, no audio track. Homepage hero.
+  hero: { src: `${BASE}videos/hero-renahome.mp4`, poster: `${BASE}videos/hero-renahome-poster.jpg` },
+  // Workshop: CNC machining and carved oak panels, with sound. "The art of woodworking" section.
+  craft: { src: `${BASE}videos/production-renahome.mp4`, poster: `${BASE}videos/production-renahome-poster.jpg` },
+};
+
 // Section ids double as URL anchors, so they stay the same in every language.
 // Labels come from `t.nav[id]`. Links with `href` open a separate page instead of a homepage section.
 export const navLinks = [

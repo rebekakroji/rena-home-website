@@ -13,6 +13,9 @@ import Footer from './components/Footer';
 import CollectionPage from './components/CollectionPage';
 import WhatsAppButton from './components/WhatsAppButton';
 import DesignStudio from './components/design/DesignStudio';
+import DesignPromo from './components/DesignPromo';
+import DesignFab from './components/DesignFab';
+import Craft from './components/Craft';
 
 export default function App() {
   const route = useHashRoute();
@@ -79,7 +82,9 @@ export default function App() {
         ) : (
           <>
             <Hero />
+            <DesignPromo />
             <About />
+            <Craft />
             <Collections />
             <Projects />
             <WhyUs />
@@ -88,6 +93,8 @@ export default function App() {
         )}
       </main>
       <Footer />
+      {/* Shortcut to the design studio on every page except the studio itself. */}
+      {route.page !== 'design' && <DesignFab />}
       <WhatsAppButton />
     </>
   );

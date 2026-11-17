@@ -15,7 +15,7 @@ binding = "AI"
 [vars]
 # Exact origins allowed to call the API (scheme + host [+ port], no path).
 # Add the RENA HOME domain here when it is purchased, e.g. "https://renahome.al,https://www.renahome.al".
-ALLOWED_ORIGINS = "https://rebekakroji.github.io,http://localhost:5173,http://localhost:4173"
+ALLOWED_ORIGINS = "https://rebekakroji.github.io,http://localhost:5173,http://localhost:4173,https://6afc230e87875f5a76230e8a--sage-bublanina-81540d.netlify.app,https://sage-bublanina-81540d.netlify.app"
 
 # Per-IP rate limit: 5 designs per 60 seconds per visitor (approximate, counted per Cloudflare location).
 # namespace_id must be a positive integer that is unique within the Cloudflare account.

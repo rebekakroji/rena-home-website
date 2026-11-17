@@ -12,7 +12,7 @@ const ROOMS = {
 const STYLES = {
   modern: 'modern',
   minimalist: 'minimalist',
-  luxury: 'luxurious, high-end',
+  luxury: 'refined, high-end',
   scandinavian: 'Scandinavian',
 };
 const COLORS = {
@@ -79,10 +79,15 @@ export function parseOptions(raw) {
 
 const list = (items) => (items.length <= 1 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items.at(-1)}`);
 
-/** Builds the English prompt for FLUX.2 [klein]. The room photo is sent as input_image_0. */
+/**
+ * Builds the English prompt for FLUX.2 [klein]. The room photo is sent as input_image_0.
+ * Wording is positive and neutral on purpose: FLUX models do not support negative instructions,
+ * so phrases like "no people" can introduce the very concept they try to exclude. The scene is
+ * described as an empty, tidy room in architectural interior photography instead.
+ */
 export function buildPrompt({ room, style, color, material, preferences }) {
   const furniture = [
-    `${style ? STYLES[style] + ' ' : ''}made-to-measure furniture and cabinetry`,
+    `${style ? STYLES[style] + ' ' : ''}made-to-measure cabinetry and furniture`,
     color ? `in ${COLORS[color]} tones` : '',
     material ? `with ${MATERIALS[material]}` : '',
   ]
@@ -91,12 +96,11 @@ export function buildPrompt({ room, style, color, material, preferences }) {
   const extras = preferences.map((p) => PREFERENCES[p]);
 
   return [
-    `Redesign the ${ROOMS[room]} shown in image 0 as a photorealistic interior photograph.`,
-    'Keep the architecture exactly as in image 0: the same walls, windows, doors, ceiling, floor area and camera perspective.',
-    `Replace the furniture with elegant ${furniture}.`,
+    `Interior design visualisation of the ${ROOMS[room]} in image 0.`,
+    'Keep the same room layout, walls, windows, doors, ceiling and camera angle as image 0.',
+    `Furnish it with ${furniture}.`,
     extras.length ? `Include ${list(extras)}.` : '',
-    'Premium, minimalist interior design, balanced natural light, realistic materials and fine detail.',
-    'No people, no text, no logos, no watermark.',
+    'Empty, tidy room, professional architectural interior photography, soft natural daylight, realistic materials.',
   ]
     .filter(Boolean)
     .join(' ');
