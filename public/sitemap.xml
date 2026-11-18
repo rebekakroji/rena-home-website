@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  RENA HOME sitemap. The site is a single page: collections, projects and the design studio are hash routes
+  (#/koleksioni/..., #/dizajno), which search engines treat as the same URL, so only the home page is listed.
+  Update <lastmod> when the content changes significantly.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mobilerirena.com/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
