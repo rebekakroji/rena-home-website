@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { navHref, navLinks, site } from '../data/site';
 import { useLanguage } from '../i18n/LanguageContext';
 import Logo from './Logo';
@@ -6,6 +7,9 @@ import { Instagram } from './Icons';
 export default function Footer() {
   const { t, collections } = useLanguage();
   const f = t.footer;
+  // The build year first (identical to the prerendered HTML), then the visitor's current year.
+  const [year, setYear] = useState(__BUILD_YEAR__);
+  useEffect(() => setYear(new Date().getFullYear()), []);
 
   return (
     <footer className="footer">
@@ -20,7 +24,7 @@ export default function Footer() {
           </div>
 
           <nav className="footer__col" aria-label={f.navAria}>
-            <h2 className="footer__heading">{f.navHeading}</h2>
+            <p className="footer__heading">{f.navHeading}</p>
             <ul>
               {navLinks.map((l) => (
                 <li key={l.id}>
@@ -31,7 +35,7 @@ export default function Footer() {
           </nav>
 
           <nav className="footer__col" aria-label={f.collectionsHeading}>
-            <h2 className="footer__heading">{f.collectionsHeading}</h2>
+            <p className="footer__heading">{f.collectionsHeading}</p>
             <ul>
               {collections.map((c) => (
                 <li key={c.slug}>
@@ -42,7 +46,7 @@ export default function Footer() {
           </nav>
 
           <div className="footer__col">
-            <h2 className="footer__heading">{f.visitHeading}</h2>
+            <p className="footer__heading">{f.visitHeading}</p>
             <address>
               <p>{site.name}</p>
               <p>{site.address}</p>
@@ -69,7 +73,7 @@ export default function Footer() {
 
         <div className="footer__bottom">
           <p>
-            © {new Date().getFullYear()} {site.name}. {f.rights}
+            © {year} {site.name}. {f.rights}
           </p>
           <a href="#kryefaqja" className="footer__top-link">
             {f.backToTop}

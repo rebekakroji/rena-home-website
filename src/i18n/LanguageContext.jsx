@@ -5,7 +5,8 @@ import { collections, projectGalleries } from '../data/collections';
 const STORAGE_KEY = 'rena-home-lang';
 const HTML_LANG = { sq: 'sq', en: 'en', it: 'it' };
 
-const readStoredLang = () => {
+// The visitor's saved language (Albanian by default, and always at build time when there is no `window`).
+export const readStoredLang = () => {
   try {
     const stored = window.localStorage.getItem(STORAGE_KEY);
     return stored && translations[stored] ? stored : DEFAULT_LANG;

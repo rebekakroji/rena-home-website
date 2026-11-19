@@ -1,6 +1,8 @@
 // Base path of the deployed site ("./" by default, see vite.config.js). Prefix every
 // file from public/ with it so images work on the GitHub Pages URL and on a custom domain.
-export const BASE = import.meta.env.BASE_URL;
+// Vite turns the relative base into "/" for the build-time (SSR) render; use the same "./" there so the
+// prerendered HTML and the browser render produce identical paths (and the check in check-dist passes).
+export const BASE = import.meta.env.SSR && !process.env.VITE_BASE ? './' : import.meta.env.BASE_URL;
 
 // Only verified business information, as provided by the business.
 // Translatable text (opening hours, navigation labels) lives in src/i18n/translations.js.

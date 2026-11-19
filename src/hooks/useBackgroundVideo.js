@@ -1,5 +1,8 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { autoplayAllowed } from './useAutoplayVideo';
+
+// useLayoutEffect in the browser; plain useEffect when rendering at build time (no DOM there).
+const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect;
 
 /**
  * Decorative background video (homepage hero): muted, inline, looping, never any controls.
@@ -16,9 +19,14 @@ import { autoplayAllowed } from './useAutoplayVideo';
  * With "reduce motion" or data saver nothing is played or downloaded: only the poster is shown.
  */
 export function useBackgroundVideo(ref) {
-  const [enabled] = useState(autoplayAllowed);
+  // Off on the first render — identical to the HTML prerendered at build time, so hydration matches —
+  // then switched on right after mount (before the first paint) when the visitor's settings allow it.
+  const [enabled, setEnabled] = useState(false);
+  useIsomorphicLayoutEffect(() => {
+    setEnabled(autoplayAllowed());
+  }, []);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const v = ref.current;
     if (!v) return undefined;
 

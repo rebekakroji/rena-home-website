@@ -8,4 +8,6 @@ export default defineConfig({
   // Override with VITE_BASE only if an absolute base is ever required.
   base: process.env.VITE_BASE || './',
   plugins: [react()],
+  // Year of the build: the footer renders it first so the prerendered HTML and the browser match.
+  define: { __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()) },
 });
