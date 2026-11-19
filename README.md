@@ -22,11 +22,17 @@ It can also be started manually: **Actions → Deploy to GitHub Pages → Run wo
 
 One-time setup: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
-- The build uses a **relative base path** (`base: './'` in `vite.config.js`), so the same output works at
-  `https://<user>.github.io/rena-home-website/` and at a custom domain. Files from `public/` are referenced in code
-  through `BASE` (`src/data/site.js`), never as `/images/...`.
-- `npm run build` runs `scripts/check-dist.mjs` afterwards and fails if any root-absolute or missing path ends up in `dist/`.
-- Pages use hash URLs (for example `#/koleksioni/kuzhina`), so no 404 or redirect setup is needed.
+- The site is served from the root of `https://mobilerirena.com` (the `github.io` project URL redirects there), so the
+  build uses the **root base path** (`base: '/'` in `vite.config.js`). Files from `public/` are referenced in code
+  through `BASE` (`src/data/site.js`).
+- **Languages have their own URLs:** `/` (Albanian), `/en/` and `/it/`. The language comes from the URL; the switcher
+  changes the URL without reloading. `npm run build` prerenders the homepage in each language
+  (`src/entry-server.jsx`, `scripts/prerender.mjs`) into `dist/index.html`, `dist/en/index.html` and
+  `dist/it/index.html`, each with its own title, description, canonical, hreflang and Open Graph tags.
+- `npm run build` then runs `scripts/check-dist.mjs`, which fails if a language page, a referenced file or the
+  per-page metadata is missing or wrong.
+- Collections and the design studio use hash URLs (for example `/en/#/koleksioni/kuzhina`), so no 404 or redirect
+  setup is needed.
 
 ### When the domain is connected
 

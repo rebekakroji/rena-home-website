@@ -35,8 +35,8 @@ jobs:
             echo "AI design API: ${{ vars.VITE_DESIGN_API_URL }}"
           fi
 
-      # The build uses a relative base path (vite.config.js) and then verifies the paths in dist/
-      # (scripts/check-dist.mjs), so the same output works on the GitHub Pages URL and a custom domain.
+      # The build prerenders the homepage for /, /en/ and /it/ and then verifies the pages, files and metadata
+      # in dist/ (scripts/check-dist.mjs) before anything is deployed.
       - run: npm run build
         env:
           # Public URL of the Cloudflare Worker (Settings → Secrets and variables → Actions → Variables).

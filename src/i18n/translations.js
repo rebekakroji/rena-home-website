@@ -8,6 +8,8 @@ const sq = {
     title: 'RENA HOME — Mobilje dhe dizajn interieri në Fushë-Krujë',
     description:
       'RENA HOME — mobilje dhe dizajn interieri që nga viti 1993. Dhoma gjumi, kuzhina, sallone dhe garderoba të menduara me kujdes. Tirane - Fushe Kruje km 14 Nikel.',
+    // Description of the link-preview image (og-image.jpg).
+    imageAlt: 'RENA HOME — kuzhinë me dollapë druri arre dhe ishull travertini',
   },
 
   skipLink: 'Kalo te përmbajtja',
@@ -476,6 +478,7 @@ const en = {
     title: 'RENA HOME — Furniture and Interior Design in Fushë-Krujë',
     description:
       'RENA HOME — furniture and interior design since 1993. Thoughtfully designed bedrooms, kitchens, living rooms and wardrobes. Tirane - Fushe Kruje km 14 Nikel.',
+    imageAlt: 'RENA HOME — kitchen with walnut cabinets and a travertine island',
   },
 
   skipLink: 'Skip to content',
@@ -932,6 +935,7 @@ const it = {
     title: 'RENA HOME — Arredamento e interior design a Fushë-Krujë',
     description:
       'RENA HOME — arredamento e interior design dal 1993. Camere da letto, cucine, soggiorni e cabine armadio progettati con cura. Tirane - Fushe Kruje km 14 Nikel.',
+    imageAlt: 'RENA HOME — cucina con mobili in noce e isola in travertino',
   },
 
   skipLink: 'Vai al contenuto',

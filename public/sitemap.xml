@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  RENA HOME sitemap. The site is a single page: collections, projects and the design studio are hash routes
-  (#/koleksioni/..., #/dizajno), which search engines treat as the same URL, so only the home page is listed.
+  RENA HOME sitemap: the homepage in Albanian (/), English (/en/) and Italian (/it/), each listing all
+  language versions (hreflang). Collections and the design studio are hash routes (#/koleksioni/…, #/dizajno),
+  which search engines treat as the same URL, so they are not listed.
   Update <lastmod> when the content changes significantly.
 -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://mobilerirena.com/</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://mobilerirena.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mobilerirena.com/en/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://mobilerirena.com/it/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mobilerirena.com/" />
+  </url>
+  <url>
+    <loc>https://mobilerirena.com/en/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://mobilerirena.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mobilerirena.com/en/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://mobilerirena.com/it/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mobilerirena.com/" />
+  </url>
+  <url>
+    <loc>https://mobilerirena.com/it/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="sq" href="https://mobilerirena.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://mobilerirena.com/en/" />
+    <xhtml:link rel="alternate" hreflang="it" href="https://mobilerirena.com/it/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mobilerirena.com/" />
   </url>
 </urlset>

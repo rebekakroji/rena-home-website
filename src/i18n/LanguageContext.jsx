@@ -1,19 +1,12 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { DEFAULT_LANG, translations } from './translations';
+import { OG_LOCALE, langFromPath, langPath, langUrl } from './languageUrls';
 import { collections, projectGalleries } from '../data/collections';
 
-const STORAGE_KEY = 'rena-home-lang';
 const HTML_LANG = { sq: 'sq', en: 'en', it: 'it' };
 
-// The visitor's saved language (Albanian by default, and always at build time when there is no `window`).
-export const readStoredLang = () => {
-  try {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    return stored && translations[stored] ? stored : DEFAULT_LANG;
-  } catch {
-    return DEFAULT_LANG;
-  }
-};
+// Language of the current URL (/, /en/, /it/). At build time the prerenderer passes it explicitly.
+const langFromLocation = () => (typeof window === 'undefined' ? DEFAULT_LANG : langFromPath(window.location.pathname));
 
 // Merges the language-neutral collection data (images, sizes) with the
 // translated names, taglines, descriptions and image descriptions.
@@ -27,19 +20,26 @@ const localize = (items, texts) =>
     };
   });
 
+const setMeta = (selector, attr, value) => document.querySelector(selector)?.setAttribute(attr, value);
+
 const LanguageContext = createContext(null);
 
-export function LanguageProvider({ children }) {
-  const [lang, setLangState] = useState(readStoredLang);
+export function LanguageProvider({ children, initialLang }) {
+  const [lang, setLangState] = useState(() => initialLang ?? langFromLocation());
 
+  // Switching language moves to that language's URL (/, /en/, /it/), keeping the current #section or
+  // #/page, without reloading. Back/forward restore the language from the URL (popstate below).
   const setLang = useCallback((next) => {
     if (!translations[next]) return;
     setLangState(next);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      /* storage unavailable (private mode) — the choice still applies for this visit */
-    }
+    const target = langPath(next) + window.location.hash;
+    if (window.location.pathname + window.location.hash !== target) window.history.pushState(null, '', target);
+  }, []);
+
+  useEffect(() => {
+    const onPopState = () => setLangState(langFromLocation());
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
   const value = useMemo(() => {
@@ -60,10 +60,23 @@ export function LanguageProvider({ children }) {
     };
   }, [lang, setLang]);
 
-  // Keep the document language and description in sync for screen readers and SEO.
+  // Keep the document language and the page metadata in sync with the language shown
+  // (the prerendered pages already contain the same values; this covers in-page language switches).
   useEffect(() => {
+    const m = value.t.meta;
     document.documentElement.lang = HTML_LANG[lang];
-    document.querySelector('meta[name="description"]')?.setAttribute('content', value.t.meta.description);
+    setMeta('meta[name="description"]', 'content', m.description);
+    setMeta('link[rel="canonical"]', 'href', langUrl(lang));
+    setMeta('meta[property="og:url"]', 'content', langUrl(lang));
+    setMeta('meta[property="og:title"]', 'content', m.title);
+    setMeta('meta[property="og:description"]', 'content', m.description);
+    setMeta('meta[property="og:image:alt"]', 'content', m.imageAlt);
+    setMeta('meta[property="og:locale"]', 'content', OG_LOCALE[lang]);
+    const others = Object.keys(OG_LOCALE).filter((code) => code !== lang);
+    document.querySelectorAll('meta[property="og:locale:alternate"]').forEach((el, i) => others[i] && el.setAttribute('content', OG_LOCALE[others[i]]));
+    setMeta('meta[name="twitter:title"]', 'content', m.title);
+    setMeta('meta[name="twitter:description"]', 'content', m.description);
+    setMeta('meta[name="twitter:image:alt"]', 'content', m.imageAlt);
   }, [lang, value.t]);
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
