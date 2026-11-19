@@ -5,6 +5,12 @@ import { ChevronLeft, ChevronRight, Close } from './Icons';
 
 const pad = (n) => String(n).padStart(2, '0');
 
+// Width (CSS px) at which a photo is shown full-screen: limited by the screen width and, through its aspect
+// ratio, by the available height (.lightbox__img max-height ≈ 100svh − 150 px). Used as `sizes`, so the browser
+// downloads the WebP that matches — not more. Only used in the browser (the viewer opens on click).
+const displayedSizes = (image) =>
+  `${Math.round(Math.min(window.innerWidth, (window.innerHeight - 150) * (image.width / image.height)))}px`;
+
 export default function Lightbox({ images, index, onClose, onChange, title }) {
   const { t } = useLanguage();
   const open = index !== null && index >= 0;
@@ -66,13 +72,18 @@ export default function Lightbox({ images, index, onClose, onChange, title }) {
     return () => window.removeEventListener('keydown', onKey);
   }, [open, close, go]);
 
-  // Preload neighbours so prev/next feels instant.
+  // Preload neighbours so prev/next feels instant — the same optimized WebP size the viewer will show.
   useEffect(() => {
     if (!open) return;
     [1, -1].forEach((step) => {
       const n = images[(index + step + images.length) % images.length];
       const pre = new Image();
-      pre.src = n.src;
+      if (n.srcSet) {
+        pre.sizes = displayedSizes(n);
+        pre.srcset = n.srcSet;
+      } else {
+        pre.src = n.src;
+      }
     });
   }, [open, index, images]);
 
@@ -122,7 +133,18 @@ export default function Lightbox({ images, index, onClose, onChange, title }) {
           key={image.src}
           className={`lightbox__figure ${direction > 0 ? 'from-right' : direction < 0 ? 'from-left' : ''}`}
         >
-          <img src={image.src} alt={image.alt} width={image.width} height={image.height} className="lightbox__img" />
+          {/* Full-screen: the browser picks the WebP that matches the displayed size — the image is limited by the
+              screen width and by its height (see .lightbox__img), so `sizes` is the width it is actually shown at. */}
+          <picture className="img-picture">
+            {image.srcSet && (
+              <source
+                type="image/webp"
+                srcSet={image.srcSet}
+                sizes={displayedSizes(image)}
+              />
+            )}
+            <img src={image.src} alt={image.alt} width={image.width} height={image.height} className="lightbox__img" />
+          </picture>
           <figcaption className="lightbox__caption">{image.alt}</figcaption>
         </figure>
       </div>

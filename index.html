@@ -32,35 +32,54 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://mobilerirena.com/og-image.jpg" />
 
-    <!-- Business details for search engines (verified data, same as on the website). -->
+    <!-- Structured data for search engines (verified data, same as on the website), on every language page:
+         the business (FurnitureStore, with the official logo) and the website (site name shown in Google results),
+         linked by @id — the website's publisher is the business. -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "FurnitureStore",
-        "name": "RENA HOME",
-        "url": "https://mobilerirena.com/",
-        "logo": "https://mobilerirena.com/images/logo/rena-logo.jpeg",
-        "image": "https://mobilerirena.com/images/projects/projekt2.jpeg",
-        "description": "Mobilje dhe dizajn interieri që nga viti 1993: dhoma gjumi, kuzhina, sallone, garderoba dhe mobilim hotelesh.",
-        "foundingDate": "1993",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Tirane - Fushe Kruje km 14",
-          "addressLocality": "Nikel, Fushë-Krujë",
-          "addressCountry": "AL"
-        },
-        "telephone": ["+355682000776", "+355688038291", "+355694528877"],
-        "email": "mobilerirena1993@gmail.com",
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "08:00",
-          "closes": "18:00"
-        },
-        "sameAs": ["https://www.instagram.com/mobileri_rena/"]
+        "@graph": [
+          {
+            "@type": "FurnitureStore",
+            "@id": "https://mobilerirena.com/#organization",
+            "name": "RENA HOME",
+            "url": "https://mobilerirena.com/",
+            "logo": "https://mobilerirena.com/images/logo/rena-logo.jpeg",
+            "image": "https://mobilerirena.com/images/projects/projekt2.jpeg",
+            "description": "Mobilje dhe dizajn interieri që nga viti 1993: dhoma gjumi, kuzhina, sallone, garderoba dhe mobilim hotelesh.",
+            "foundingDate": "1993",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Tirane - Fushe Kruje km 14",
+              "addressLocality": "Nikel, Fushë-Krujë",
+              "addressCountry": "AL"
+            },
+            "telephone": ["+355682000776", "+355688038291", "+355694528877"],
+            "email": "mobilerirena1993@gmail.com",
+            "openingHoursSpecification": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              "opens": "08:00",
+              "closes": "18:00"
+            },
+            "sameAs": ["https://www.instagram.com/mobileri_rena/"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://mobilerirena.com/#website",
+            "url": "https://mobilerirena.com/",
+            "name": "RENA HOME",
+            "alternateName": "Mobileri Rena",
+            "inLanguage": ["sq", "en", "it"],
+            "publisher": { "@id": "https://mobilerirena.com/#organization" }
+          }
+        ]
       }
     </script>
+    <!-- Favicons: the red "RN" mark from the logo (readable at small sizes; see scripts/make-favicons.mjs).
+         The full logo is used where it is shown large (apple-touch-icon, structured-data logo). -->
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" type="image/png" href="/favicon-192.png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <!-- Content is prerendered into #root and fades in with JavaScript; without JavaScript show it at once. -->
     <noscript>

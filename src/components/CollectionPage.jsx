@@ -92,7 +92,7 @@ export default function CollectionPage({ slug }) {
         ].map(({ c, label, dir }) => (
           <a key={dir} href={`#/koleksioni/${c.slug}`} className={`pager pager--${dir}`}>
             <span className="pager__media">
-              <Img image={coverOf(c)} sizes="50vw" />
+              <Img image={coverOf(c)} sizes="(min-width: 641px) 50vw, 100vw" />
             </span>
             <span className="pager__text">
               <span className="pager__label">

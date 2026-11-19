@@ -65,6 +65,11 @@ img {
   max-width: 100%;
   height: auto;
 }
+/* <picture> wrapper around images with optimized WebP sources: it creates no box of its own,
+   so the <img> inside lays out exactly as if it were a direct child. */
+.img-picture {
+  display: contents;
+}
 
 a {
   color: inherit;

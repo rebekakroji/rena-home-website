@@ -1,9 +1,9 @@
 // Verifies the production build in dist/ before it is deployed:
 //  - the three language pages exist: / (sq), /en/ and /it/;
-//  - every local file referenced by a page (src, href, poster — including the prerendered content) exists,
+//  - every local file referenced by a page (src, srcset, href, poster — including the prerendered content) exists,
 //    and uses the root-absolute form ("/…") so it resolves from every language folder;
 //  - each page has exactly one title, description and canonical (its own URL), the 4 reciprocal hreflang links,
-//    and the matching <html lang>.
+//    the matching <html lang>, and valid JSON-LD (FurnitureStore + WebSite "RENA HOME", linked by @id).
 // Skipped when a different base is set on purpose via VITE_BASE.
 
 import { access, readFile } from 'node:fs/promises';
@@ -33,8 +33,12 @@ for (const page of pages) {
   const html = await readFile(page.file, 'utf8');
   const name = page.file.replace('dist/', '');
 
-  // Local references (skip external URLs, mail/phone links, data URIs and in-page #anchors).
-  const refs = [...html.matchAll(/\b(?:src|href|poster)="([^"]+)"/g)].map((m) => m[1]);
+  // Local references (skip external URLs, mail/phone links, data URIs and in-page #anchors), including every
+  // candidate in srcset (the optimized WebP images of the prerendered content).
+  const refs = [
+    ...[...html.matchAll(/\b(?:src|href|poster)="([^"]+)"/g)].map((m) => m[1]),
+    ...[...html.matchAll(/\bsrcset="([^"]+)"/gi)].flatMap((m) => m[1].split(',').map((c) => c.trim().split(/\s+/)[0])),
+  ];
   for (const ref of new Set(refs)) {
     if (/^(https?:|mailto:|tel:|data:|#)/.test(ref)) continue;
     if (!ref.startsWith('/')) {
@@ -56,9 +60,26 @@ for (const page of pages) {
   const alts = Object.fromEntries([...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)"/g)].map((m) => [m[1], m[2]]));
   if (count(html, /hreflang=/g) !== 4 || JSON.stringify(alts) !== JSON.stringify(hreflang)) problems.push(`${name}: hreflang ${JSON.stringify(alts)}`);
   if (!html.includes('<div id="root"><')) problems.push(`${name}: prerendered content missing`);
+
+  // Structured data: one valid JSON-LD block with the business (official logo) and the website (site name in
+  // Google results), linked by @id.
+  const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  if (ld.length !== 1) problems.push(`${name}: expected 1 JSON-LD block, found ${ld.length}`);
+  else {
+    try {
+      const graph = JSON.parse(ld[0][1])['@graph'] || [];
+      const org = graph.find((n) => n['@type'] === 'FurnitureStore');
+      const site = graph.find((n) => n['@type'] === 'WebSite');
+      if (!org?.['@id'] || org.name !== 'RENA HOME' || !org.logo) problems.push(`${name}: FurnitureStore @id/name/logo missing`);
+      if (site?.name !== 'RENA HOME' || site.url !== `${SITE}/` || site.publisher?.['@id'] !== org?.['@id'])
+        problems.push(`${name}: WebSite name/url/publisher incorrect`);
+    } catch (e) {
+      problems.push(`${name}: invalid JSON-LD (${e.message})`);
+    }
+  }
 }
 
-for (const f of ['dist/sitemap.xml', 'dist/robots.txt', 'dist/favicon.ico', 'dist/apple-touch-icon.png', 'dist/og-image.jpg']) {
+for (const f of ['dist/sitemap.xml', 'dist/robots.txt', 'dist/favicon.ico', 'dist/favicon-192.png', 'dist/apple-touch-icon.png', 'dist/og-image.jpg']) {
   if (!(await exists(f))) problems.push(`${f}: missing`);
 }
 

@@ -227,7 +227,7 @@ export default function DesignStudio() {
                     }}
                   >
                     <span className="ds-room__media">
-                      <Img image={coverOf(getCollection(cover))} sizes="(min-width: 1101px) 22vw, 50vw" />
+                      <Img image={coverOf(getCollection(cover))} sizes="(min-width: 1101px) 32vw, (min-width: 641px) 50vw, 100vw" />
                     </span>
                     <span className="ds-room__label">
                       {d.room.options[id]}
